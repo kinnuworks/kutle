@@ -1,0 +1,11 @@
+{
+  "format": "kutle-measured-soh-v1",
+  "description": "SoH = measured capacity / design capacity, interval from gauge accuracy plus staleness.",
+  "accuracy": 0.01,
+  "accuracy_source": "TI bq20z80 product page: 'Better than 1% Error Over Lifetime of the Battery'; TI SLUA364",
+  "fade_median_per_cycle": 0.00030177741788170345,
+  "fade_p90_per_cycle": 0.0012802994486181961,
+  "fade_source": "per-cycle SoH fade over 50-cycle windows in the training datasets, each dataset weighted equally",
+  "fresh_cycles": 50,
+  "model_id": "kutle-soh-measured-v1"
+}

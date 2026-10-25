@@ -1,0 +1,631 @@
+{
+  "codeCommit": "a2d5a1363528dfbe490fde932aee33d0acd3bf63",
+  "codeCommitNote": "HEAD of the repository when training ran. Commit model/ and re-run before registering so codeHash points at the code that produced these numbers.",
+  "models": {
+    "kutle-soh-learned-v2": {
+      "maeBps": 1819,
+      "baselineMaeBps": 1928,
+      "coverageBps": 1261,
+      "registrable": false,
+      "verdict": "Not registrable: coverage 12.6% is below the 85% floor. Every interval is calibrated on other datasets only; NASA was not used to choose anything.",
+      "weightsFile": "model.json",
+      "weightsSha256": "cf67878a0b59f596b4994252063c03d45bfe3a62c4a52ceca53ff4a751fc112d",
+      "evalDataFile": "eval_set.csv",
+      "evalDataSha256": "265ca95baa439b220ed4c8fcd30581155a1e4b7216015397714b5ebcaeec863e",
+      "registryPayload": {
+        "weightsHash": "0xcf67878a0b59f596b4994252063c03d45bfe3a62c4a52ceca53ff4a751fc112d",
+        "evalDataHash": "0x265ca95baa439b220ed4c8fcd30581155a1e4b7216015397714b5ebcaeec863e",
+        "maeBps": 1819,
+        "baselineMaeBps": 1928,
+        "coverageBps": 1261
+      },
+      "detail": {
+        "method": "predicts SoH from gauge signals other than the measured capacity",
+        "heldout": {
+          "dataset": "nasa",
+          "cells": [
+            "nasa/B0005",
+            "nasa/B0006",
+            "nasa/B0007",
+            "nasa/B0018",
+            "nasa/B0034",
+            "nasa/B0036"
+          ],
+          "rows": 1023
+        },
+        "train_datasets": [
+          "calce",
+          "severson"
+        ],
+        "soh": {
+          "mae_bps": 1819.3,
+          "rmse_bps": 2019.4,
+          "coverage": 0.1261,
+          "target_coverage": 0.9,
+          "mean_interval_width_bps": 1555.2,
+          "per_cell": [
+            {
+              "cell": "nasa/B0005",
+              "rows": 168,
+              "mae_bps": 1707.2,
+              "baseline_mae_bps": 1909.0,
+              "coverage": 0.161,
+              "mean_width_bps": 1514.3
+            },
+            {
+              "cell": "nasa/B0006",
+              "rows": 168,
+              "mae_bps": 1867.8,
+              "baseline_mae_bps": 2040.4,
+              "coverage": 0.238,
+              "mean_width_bps": 1504.2
+            },
+            {
+              "cell": "nasa/B0007",
+              "rows": 168,
+              "mae_bps": 1341.1,
+              "baseline_mae_bps": 1549.4,
+              "coverage": 0.31,
+              "mean_width_bps": 1527.0
+            },
+            {
+              "cell": "nasa/B0018",
+              "rows": 132,
+              "mae_bps": 1978.9,
+              "baseline_mae_bps": 2045.4,
+              "coverage": 0.076,
+              "mean_width_bps": 1533.0
+            },
+            {
+              "cell": "nasa/B0034",
+              "rows": 193,
+              "mae_bps": 2734.8,
+              "baseline_mae_bps": 2797.1,
+              "coverage": 0.0,
+              "mean_width_bps": 1697.0
+            },
+            {
+              "cell": "nasa/B0036",
+              "rows": 194,
+              "mae_bps": 1268.8,
+              "baseline_mae_bps": 1230.1,
+              "coverage": 0.0,
+              "mean_width_bps": 1533.1
+            }
+          ],
+          "by_feature_pattern": {
+            "none": {
+              "mae_bps": 1919.6,
+              "coverage": 0.06,
+              "mean_width_bps": 1046.2
+            },
+            "res": {
+              "mae_bps": 1819.3,
+              "coverage": 0.126,
+              "mean_width_bps": 1555.2
+            }
+          },
+          "grades_assigned": {
+            "REUSE": 0,
+            "REPURPOSE": 0,
+            "BENCH_TEST": 1023,
+            "RECYCLE": 0
+          },
+          "grades_more_permissive_than_truth": 0
+        },
+        "baseline": {
+          "kind": "linear SoH vs cycle count fitted on training cells",
+          "weighted": {
+            "intercept": 1.0064335490135914,
+            "slope_per_cycle": -0.00034656278119629626
+          },
+          "unweighted": {
+            "intercept": 1.0073002039592707,
+            "slope_per_cycle": -0.0003270686447998718
+          },
+          "weighted_mae_bps": 1927.9,
+          "unweighted_mae_bps": 1953.6,
+          "registry_value": "the lower of the two",
+          "linear_vs_equivalent_full_cycles_mae_bps": 2103.0
+        },
+        "transfer_and_feature_selection": {
+          "criterion": "LODO MAE between training datasets, lower wins",
+          "candidates": {
+            "minimal|cycle|free": {
+              "features": [
+                "cycle",
+                "r_ratio"
+              ],
+              "counter": "cycle",
+              "monotone": false,
+              "lodo_mae_bps": 734,
+              "lodo_mae_bps_by_left_out_dataset": {
+                "calce": 1137,
+                "severson": 331
+              },
+              "grouped_cv_mae_bps": 249
+            },
+            "minimal|cycle|monotone": {
+              "features": [
+                "cycle",
+                "r_ratio"
+              ],
+              "counter": "cycle",
+              "monotone": true,
+              "lodo_mae_bps": 724,
+              "lodo_mae_bps_by_left_out_dataset": {
+                "calce": 1131,
+                "severson": 317
+              },
+              "grouped_cv_mae_bps": 267
+            },
+            "minimal|efc|free": {
+              "features": [
+                "efc",
+                "r_ratio"
+              ],
+              "counter": "efc",
+              "monotone": false,
+              "lodo_mae_bps": 750,
+              "lodo_mae_bps_by_left_out_dataset": {
+                "calce": 1149,
+                "severson": 351
+              },
+              "grouped_cv_mae_bps": 256
+            },
+            "minimal|efc|monotone": {
+              "features": [
+                "efc",
+                "r_ratio"
+              ],
+              "counter": "efc",
+              "monotone": true,
+              "lodo_mae_bps": 738,
+              "lodo_mae_bps_by_left_out_dataset": {
+                "calce": 1132,
+                "severson": 343
+              },
+              "grouped_cv_mae_bps": 276
+            },
+            "gauge|cycle|free": {
+              "features": [
+                "cycle",
+                "r_ratio",
+                "t_mean",
+                "t_max",
+                "dv_mean_dis"
+              ],
+              "counter": "cycle",
+              "monotone": false,
+              "lodo_mae_bps": 904,
+              "lodo_mae_bps_by_left_out_dataset": {
+                "calce": 1163,
+                "severson": 646
+              },
+              "grouped_cv_mae_bps": 203
+            },
+            "gauge|cycle|monotone": {
+              "features": [
+                "cycle",
+                "r_ratio",
+                "t_mean",
+                "t_max",
+                "dv_mean_dis"
+              ],
+              "counter": "cycle",
+              "monotone": true,
+              "lodo_mae_bps": 944,
+              "lodo_mae_bps_by_left_out_dataset": {
+                "calce": 1216,
+                "severson": 672
+              },
+              "grouped_cv_mae_bps": 215
+            },
+            "gauge|efc|free": {
+              "features": [
+                "efc",
+                "r_ratio",
+                "t_mean",
+                "t_max",
+                "dv_mean_dis"
+              ],
+              "counter": "efc",
+              "monotone": false,
+              "lodo_mae_bps": 910,
+              "lodo_mae_bps_by_left_out_dataset": {
+                "calce": 1171,
+                "severson": 649
+              },
+              "grouped_cv_mae_bps": 207
+            },
+            "gauge|efc|monotone": {
+              "features": [
+                "efc",
+                "r_ratio",
+                "t_mean",
+                "t_max",
+                "dv_mean_dis"
+              ],
+              "counter": "efc",
+              "monotone": true,
+              "lodo_mae_bps": 896,
+              "lodo_mae_bps_by_left_out_dataset": {
+                "calce": 1208,
+                "severson": 584
+              },
+              "grouped_cv_mae_bps": 220
+            },
+            "gauge_rates|cycle|free": {
+              "features": [
+                "cycle",
+                "r_ratio",
+                "t_mean",
+                "t_max",
+                "dv_mean_dis",
+                "chg_c_max",
+                "dis_c_max"
+              ],
+              "counter": "cycle",
+              "monotone": false,
+              "lodo_mae_bps": 908,
+              "lodo_mae_bps_by_left_out_dataset": {
+                "calce": 1125,
+                "severson": 691
+              },
+              "grouped_cv_mae_bps": 189
+            },
+            "gauge_rates|cycle|monotone": {
+              "features": [
+                "cycle",
+                "r_ratio",
+                "t_mean",
+                "t_max",
+                "dv_mean_dis",
+                "chg_c_max",
+                "dis_c_max"
+              ],
+              "counter": "cycle",
+              "monotone": true,
+              "lodo_mae_bps": 900,
+              "lodo_mae_bps_by_left_out_dataset": {
+                "calce": 1143,
+                "severson": 657
+              },
+              "grouped_cv_mae_bps": 195
+            },
+            "gauge_rates|efc|free": {
+              "features": [
+                "efc",
+                "r_ratio",
+                "t_mean",
+                "t_max",
+                "dv_mean_dis",
+                "chg_c_max",
+                "dis_c_max"
+              ],
+              "counter": "efc",
+              "monotone": false,
+              "lodo_mae_bps": 898,
+              "lodo_mae_bps_by_left_out_dataset": {
+                "calce": 1169,
+                "severson": 627
+              },
+              "grouped_cv_mae_bps": 191
+            },
+            "gauge_rates|efc|monotone": {
+              "features": [
+                "efc",
+                "r_ratio",
+                "t_mean",
+                "t_max",
+                "dv_mean_dis",
+                "chg_c_max",
+                "dis_c_max"
+              ],
+              "counter": "efc",
+              "monotone": true,
+              "lodo_mae_bps": 911,
+              "lodo_mae_bps_by_left_out_dataset": {
+                "calce": 1159,
+                "severson": 663
+              },
+              "grouped_cv_mae_bps": 201
+            }
+          },
+          "chosen": "minimal|cycle|monotone"
+        },
+        "interval": {
+          "calibration": "pooled leave-one-dataset-out residuals between training datasets",
+          "score": "relative",
+          "relative_floor": 0.05,
+          "swap_test": {
+            "absolute": {
+              "calce->severson": {
+                "coverage": 1.0,
+                "mean_width": 0.5438606235192547
+              },
+              "severson->calce": {
+                "coverage": 0.4725,
+                "mean_width": 0.11716714752321213
+              }
+            },
+            "relative": {
+              "calce->severson": {
+                "coverage": 0.9925,
+                "mean_width": 0.33109170404206706
+              },
+              "severson->calce": {
+                "coverage": 0.5367,
+                "mean_width": 0.1816792904880836
+              }
+            }
+          },
+          "q": {
+            "none": 1.0461503172803788,
+            "res": 1.5330577028756047
+          }
+        },
+        "rul": {
+          "rul80": {
+            "rows": 464,
+            "cells": 6,
+            "mae_cycles": 117.2,
+            "median_abs_error_cycles": 56.0,
+            "coverage": 0.756,
+            "mean_width_cycles": 348.6,
+            "mean_true_rul_cycles": 58.0,
+            "baseline_mae_cycles": 114.0,
+            "baseline": "(soh_now - threshold) / average fade per cycle since new, capped at 5000",
+            "calibration": "leave-one-dataset-out residuals"
+          },
+          "rul60": {
+            "rows": 159,
+            "cells": 1,
+            "mae_cycles": 689.8,
+            "median_abs_error_cycles": 631.0,
+            "coverage": 0.0,
+            "mean_width_cycles": 868.5,
+            "mean_true_rul_cycles": 80.0,
+            "baseline_mae_cycles": 240.2,
+            "baseline": "(soh_now - threshold) / average fade per cycle since new, capped at 5000",
+            "calibration": "grouped-by-cell CV residuals; only one training dataset reaches this threshold, so there is no out-of-domain calibration and the interval is in-distribution"
+          }
+        },
+        "rul_training": {
+          "rul80": {
+            "rows": 26305,
+            "cells": 53,
+            "cells_by_dataset": {
+              "calce": 10,
+              "severson": 43
+            },
+            "interval_score": "absolute, on sqrt(cycles)",
+            "calibration": "leave-one-dataset-out residuals"
+          },
+          "rul60": {
+            "rows": 8494,
+            "cells": 9,
+            "cells_by_dataset": {
+              "calce": 9
+            },
+            "interval_score": "absolute, on sqrt(cycles)",
+            "calibration": "grouped-by-cell CV residuals; only one training dataset reaches this threshold, so there is no out-of-domain calibration and the interval is in-distribution"
+          }
+        },
+        "leave_one_dataset_out": {
+          "nasa": {
+            "train": [
+              "calce",
+              "severson"
+            ],
+            "interval_score": "relative",
+            "mae_bps": 1819.3,
+            "baseline_mae_bps": 1927.9,
+            "coverage": 0.126,
+            "mean_width_bps": 1555.2,
+            "beats_baseline": true
+          },
+          "calce": {
+            "train": [
+              "nasa",
+              "severson"
+            ],
+            "interval_score": "absolute",
+            "mae_bps": 1251.1,
+            "baseline_mae_bps": 988.7,
+            "coverage": 0.987,
+            "mean_width_bps": 7994.2,
+            "beats_baseline": false
+          },
+          "severson": {
+            "train": [
+              "calce",
+              "nasa"
+            ],
+            "interval_score": "absolute",
+            "mae_bps": 771.8,
+            "baseline_mae_bps": 972.3,
+            "coverage": 1.0,
+            "mean_width_bps": 8327.3,
+            "beats_baseline": true
+          }
+        },
+        "grouped_cv_on_training": {
+          "mae_bps": 266.9,
+          "baseline_mae_bps": 449.8
+        },
+        "heldout_stress_set": {
+          "cells": [
+            "nasa/B0029",
+            "nasa/B0030",
+            "nasa/B0031",
+            "nasa/B0033",
+            "nasa/B0038",
+            "nasa/B0040",
+            "nasa/B0042",
+            "nasa/B0043",
+            "nasa/B0044",
+            "nasa/B0045",
+            "nasa/B0046",
+            "nasa/B0047",
+            "nasa/B0048",
+            "nasa/B0053",
+            "nasa/B0054",
+            "nasa/B0055",
+            "nasa/B0056"
+          ],
+          "rows": 1212,
+          "mae_bps": 3139.3,
+          "baseline_mae_bps": 3337.0,
+          "coverage": 0.006,
+          "note": "NASA cells at 4, 43 or 44 C ambient or starting below 80% of rating; not registered"
+        },
+        "export_check_max_abs_diff": 0.0,
+        "hyperparameters": {
+          "loss": "absolute_error",
+          "max_iter": 200,
+          "learning_rate": 0.05,
+          "max_leaf_nodes": 15,
+          "min_samples_leaf": 50,
+          "l2_regularization": 1.0,
+          "early_stopping": false,
+          "random_state": 0
+        }
+      }
+    },
+    "kutle-soh-measured-v1": {
+      "maeBps": 240,
+      "baselineMaeBps": 1928,
+      "coverageBps": 5894,
+      "registrable": false,
+      "verdict": "Not registrable: coverage 58.9% is below the 85% floor. This method measures SoH from the gauge's capacity; its error is the gauge's error, not a prediction.",
+      "weightsFile": "measured_method.json",
+      "weightsSha256": "4df3db988451dc609d2e262130a6705923acf51269679a8bbfba9c8b1d160f26",
+      "evalDataFile": "eval_set_measured.csv",
+      "evalDataSha256": "bd9ac6dd2f6568ee6e388c96323cba67e53adccba39ba4b67ae727cb0c870fad",
+      "registryPayload": {
+        "weightsHash": "0x4df3db988451dc609d2e262130a6705923acf51269679a8bbfba9c8b1d160f26",
+        "evalDataHash": "0xbd9ac6dd2f6568ee6e388c96323cba67e53adccba39ba4b67ae727cb0c870fad",
+        "maeBps": 240,
+        "baselineMaeBps": 1928,
+        "coverageBps": 5894
+      },
+      "detail": {
+        "method": "measures SoH = capacity / design; interval from TI's stated accuracy plus staleness",
+        "accuracy_source": "TI bq20z80 product page: 'Better than 1% Error Over Lifetime of the Battery'; TI SLUA364",
+        "simulation": {
+          "rows": 1023,
+          "cells": [
+            "nasa/B0005",
+            "nasa/B0006",
+            "nasa/B0007",
+            "nasa/B0018",
+            "nasa/B0034",
+            "nasa/B0036"
+          ],
+          "staleness": "cycles since last Qmax update drawn uniformly from 0 to 30",
+          "noise_primary_sigma": 0.005,
+          "noise_stress_sigma": 0.01,
+          "seed": 20230712,
+          "file": "eval_set_measured.csv"
+        },
+        "primary": {
+          "mae_bps": 239.5,
+          "rmse_bps": 335.3,
+          "coverage": 0.5894,
+          "mean_width_bps": 385.6,
+          "grades_assigned": {
+            "REUSE": 453,
+            "REPURPOSE": 565,
+            "BENCH_TEST": 5,
+            "RECYCLE": 0
+          },
+          "grades_more_permissive_than_truth": 39
+        },
+        "stress_noise_1pct_sigma": {
+          "mae_bps": 252.8,
+          "rmse_bps": 347.3,
+          "coverage": 0.5376,
+          "mean_width_bps": 385.6,
+          "grades_assigned": {
+            "REUSE": 449,
+            "REPURPOSE": 567,
+            "BENCH_TEST": 7,
+            "RECYCLE": 0
+          },
+          "grades_more_permissive_than_truth": 37
+        },
+        "fresh_reading": {
+          "note": "Qmax updated on this cycle (N = 0), primary noise",
+          "mae_bps": 39.6,
+          "rmse_bps": 50.4,
+          "coverage": 0.9501,
+          "mean_width_bps": 200.0,
+          "grades_assigned": {
+            "REUSE": 440,
+            "REPURPOSE": 570,
+            "BENCH_TEST": 7,
+            "RECYCLE": 6
+          },
+          "grades_more_permissive_than_truth": 0
+        },
+        "stale_reading_without_widening": {
+          "note": "primary readings, staleness ignored",
+          "mae_bps": 269.1,
+          "rmse_bps": 368.9,
+          "coverage": 0.305,
+          "mean_width_bps": 200.0,
+          "grades_assigned": {
+            "REUSE": 526,
+            "REPURPOSE": 496,
+            "BENCH_TEST": 1,
+            "RECYCLE": 0
+          },
+          "grades_more_permissive_than_truth": 75
+        },
+        "baseline_note": "same linear baseline and same rows as the learned model"
+      }
+    }
+  },
+  "consistency_check": {
+    "rule": "flag when the measured SoH is outside the learned model's interval for the same row",
+    "measured_input": "simulated primary gauge readings (eval_set_measured.csv)",
+    "false_alarm_rate_on_honest_readings": 0.8016,
+    "tamper": {
+      "+5": {
+        "inflate_points": 5.0,
+        "tampered_rows": 535,
+        "honest_rows": 488,
+        "detection_rate": 0.6224,
+        "false_alarm_rate": 0.793,
+        "detection_rate_upper_bound_only": 0.0206,
+        "false_alarm_rate_upper_bound_only": 0.0
+      },
+      "+10": {
+        "inflate_points": 10.0,
+        "tampered_rows": 542,
+        "honest_rows": 481,
+        "detection_rate": 0.452,
+        "false_alarm_rate": 0.8129,
+        "detection_rate_upper_bound_only": 0.0738,
+        "false_alarm_rate_upper_bound_only": 0.0
+      },
+      "+20": {
+        "inflate_points": 20.0,
+        "tampered_rows": 497,
+        "honest_rows": 526,
+        "detection_rate": 0.499,
+        "false_alarm_rate": 0.8232,
+        "detection_rate_upper_bound_only": 0.3903,
+        "false_alarm_rate_upper_bound_only": 0.0
+      }
+    },
+    "note": "half of the rows, chosen at random, have the reported SoH inflated by the stated amount"
+  },
+  "environment": {
+    "python": "3.12.15",
+    "sklearn": "1.9.1",
+    "numpy": "2.5.4"
+  },
+  "runtime_seconds": 645.7
+}

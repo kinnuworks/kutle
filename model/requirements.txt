@@ -1,0 +1,19 @@
+# Pinned for Python 3.12. Install with: python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
+numpy==2.5.4
+scipy==1.18.1
+scikit-learn==1.9.1
+joblib==1.6.0
+threadpoolctl==3.7.0
+h5py==3.16.0
+openpyxl==3.1.5
+et_xmlfile==2.0.0
+xlrd==2.0.2
+pandas==3.1.0
+python-dateutil==3.0.0
+six==1.17.0
+tzdata==2026.5
+pytest==9.1.1
+iniconfig==2.3.1
+packaging==26.3
+pluggy==1.7.0
+Pygments==2.21.0
