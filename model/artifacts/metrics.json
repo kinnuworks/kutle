@@ -1,6 +1,12 @@
 {
-  "codeCommit": "a2d5a1363528dfbe490fde932aee33d0acd3bf63",
+  "codeCommit": "08003f9328b8b9c81550fe38aafde676bac06743",
   "codeCommitNote": "HEAD of the repository when training ran. Commit model/ and re-run before registering so codeHash points at the code that produced these numbers.",
+  "disclosure": "kutle-soh-measured-fresh-v1 and its freshness rule were adopted after the first NASA evaluation of kutle-soh-measured-v1 showed that the training-data staleness allowance under-covers fast-fading cells. The freshness limit itself was set from training data only, but the decision to add a freshness rule was made after seeing NASA results, so its NASA numbers are not a clean held-out test.",
+  "deployed": {
+    "grading": "kutle-soh-measured-fresh-v1 when the last Qmax update is fresh, otherwise BENCH_TEST",
+    "tamper_rule": "flag (and submit BENCH_TEST) when the measured SoH is above the learned model's upper bound",
+    "remaining_life": "kutle-soh-learned-v2 RUL80 model"
+  },
   "models": {
     "kutle-soh-learned-v2": {
       "maeBps": 1819,
@@ -21,6 +27,7 @@
       },
       "detail": {
         "method": "predicts SoH from gauge signals other than the measured capacity",
+        "deployment": "Not registered. Used only for remaining-life estimates and for the upper-bound-only consistency (tamper) check in the combined grader.",
         "heldout": {
           "dataset": "nasa",
           "cells": [
@@ -585,6 +592,70 @@
         },
         "baseline_note": "same linear baseline and same rows as the learned model"
       }
+    },
+    "kutle-soh-measured-fresh-v1": {
+      "maeBps": 113,
+      "baselineMaeBps": 1803,
+      "coverageBps": 7156,
+      "registrable": false,
+      "verdict": "Not registrable: coverage 71.6% is below the 85% floor. Measures SoH from the gauge's capacity and grades only fresh readings; kutle-soh-measured-fresh-v1 and its freshness rule were adopted after the first NASA evaluation of kutle-soh-measured-v1 showed that the training-data staleness allowance under-covers fast-fading cells. The freshness limit itself was set from training data only, but the decision to add a freshness rule was made after seeing NASA results, so its NASA numbers are not a clean held-out test.",
+      "weightsFile": "measured_fresh_method.json",
+      "weightsSha256": "fa4c1e993c3973f2e72322a2a1cbf9f9eb1775e83c0424b6e05a6c0e6c7b4eb1",
+      "evalDataFile": "eval_set_measured_fresh.csv",
+      "evalDataSha256": "f8d7169c4ec2eb6de6bd673df4384fefa8831c85a458bca906883454356f4d52",
+      "registryPayload": {
+        "weightsHash": "0xfa4c1e993c3973f2e72322a2a1cbf9f9eb1775e83c0424b6e05a6c0e6c7b4eb1",
+        "evalDataHash": "0xf8d7169c4ec2eb6de6bd673df4384fefa8831c85a458bca906883454356f4d52",
+        "maeBps": 113,
+        "baselineMaeBps": 1803,
+        "coverageBps": 7156
+      },
+      "detail": {
+        "method": "measures SoH = capacity / design; graded only when the last Qmax update is at most 5 cycles old, otherwise the grader submits BENCH_TEST",
+        "disclosure": "kutle-soh-measured-fresh-v1 and its freshness rule were adopted after the first NASA evaluation of kutle-soh-measured-v1 showed that the training-data staleness allowance under-covers fast-fading cells. The freshness limit itself was set from training data only, but the decision to add a freshness rule was made after seeing NASA results, so its NASA numbers are not a clean held-out test.",
+        "freshness_limit_cycles": 5,
+        "freshness_source": "TI documents when a Qmax update can happen (two rested OCV readings, at least 37% passed charge; SLYT402, SLUA364) but gives no cycle age after which it is invalid. The limit is the largest staleness at which the 90th percentile of training-cell fade (centered 5-cycle median SoH, datasets weighted equally) stays within 1 point.",
+        "freshness_p90_fade_points_by_staleness": {
+          "1": 0.191,
+          "2": 0.394,
+          "3": 0.602,
+          "4": 0.782,
+          "5": 0.949
+        },
+        "accuracy_source": "TI bq20z80 product page: 'Better than 1% Error Over Lifetime of the Battery'; TI SLUA364",
+        "evaluation_rows": "registered NASA rows whose simulated update age (from eval_set_measured.csv) is 0 to 5 cycles",
+        "rows_not_graded_as_stale": 812,
+        "primary_noise_0_5pct": {
+          "rows": 211,
+          "mae_bps": 112.6,
+          "rmse_bps": 185.0,
+          "baseline_mae_bps_same_rows": 1802.8,
+          "coverage": 0.7156,
+          "mean_width_bps": 231.5,
+          "grades_assigned": {
+            "REUSE": 110,
+            "REPURPOSE": 100,
+            "BENCH_TEST": 1,
+            "RECYCLE": 0
+          },
+          "grades_more_permissive_than_truth": 3
+        },
+        "stress_noise_1pct": {
+          "rows": 211,
+          "mae_bps": 132.8,
+          "rmse_bps": 203.0,
+          "baseline_mae_bps_same_rows": 1802.8,
+          "coverage": 0.6161,
+          "mean_width_bps": 231.5,
+          "grades_assigned": {
+            "REUSE": 110,
+            "REPURPOSE": 100,
+            "BENCH_TEST": 1,
+            "RECYCLE": 0
+          },
+          "grades_more_permissive_than_truth": 3
+        }
+      }
     }
   },
   "consistency_check": {
@@ -627,5 +698,5 @@
     "sklearn": "1.9.1",
     "numpy": "2.5.4"
   },
-  "runtime_seconds": 645.7
+  "runtime_seconds": 331.3
 }

@@ -14,8 +14,23 @@ different things.
   stated accuracy and from how stale the last capacity update is. Its accuracy
   is the gauge's accuracy. It adds no knowledge about ageing.
 
-A consistency check compares the two: a measured SoH outside the learned
-interval for the same cell state is flagged.
+- `kutle-soh-measured-fresh-v1` is the measured method restricted to readings
+  whose last Qmax update is at most 5 cycles old. Staler readings are not
+  graded by it, and the grader submits BENCH_TEST.
+
+Deployed configuration: the grader uses `kutle-soh-measured-fresh-v1` when the
+reading is fresh and submits BENCH_TEST otherwise. The learned model is not
+registered. It is used only for remaining-life estimates and for the tamper
+rule, which flags a measured SoH above the learned model's upper bound and then
+also submits BENCH_TEST.
+
+Disclosure: `kutle-soh-measured-fresh-v1` and its freshness rule were adopted
+after the first NASA evaluation of `kutle-soh-measured-v1` showed that the
+staleness allowance taken from training data under-covers fast-fading cells.
+The 5-cycle limit was set from training data only, but the decision to add a
+freshness rule came after seeing NASA results, so its NASA numbers are not a
+clean held-out test. The earlier results are kept unchanged below and in
+`metrics.json`.
 
 ## Summary of results on held-out NASA cells
 
@@ -23,9 +38,12 @@ interval for the same cell state is flagged.
 | --- | --- | --- | --- | --- | --- |
 | kutle-soh-learned-v2 | 1819 bps | 1928 bps | 12.6% | 1555 bps | no (coverage) |
 | kutle-soh-measured-v1 | 240 bps | 1928 bps | 58.9% | 386 bps | no (coverage) |
+| kutle-soh-measured-fresh-v1 (211 fresh rows) | 113 bps | 1803 bps | 71.6% | 232 bps | no (coverage) |
 
-Neither passes `ModelRegistry.register`: both beat the baseline and both fall
-short of the 85% coverage floor. The measured method's shortfall comes from
+None passes `ModelRegistry.register`: all beat the baseline and all fall short
+of the 85% coverage floor, so `registry_submission.json` is empty and
+`PassportRegistry.recordHealth` would reject any grade until a model is
+registered. The measured method's shortfall comes from
 staleness. With a fresh capacity reading its coverage is 95.0% (MAE 40 bps),
 but in the registered scenario the last update is up to 30 cycles old and NASA
 cells fade faster per cycle than the training cells it took its staleness
@@ -160,6 +178,43 @@ It does not predict ageing, it cannot detect a gauge that lies, and its
 accuracy depends on Impedance Track having had recent Qmax updates, which need
 rested open-circuit voltage readings at suitable states of charge.
 
+## Measured-fresh method (kutle-soh-measured-fresh-v1)
+
+### Freshness limit
+
+TI documents when Impedance Track can update Qmax: two open-circuit voltage
+readings taken after the cell has relaxed, outside disqualified voltage ranges,
+with at least 37% of capacity passed between them by default (TI Analog
+Applications Journal SLYT402; application note SLUA364). TI gives no cycle age
+after which a Qmax value stops being valid. The limit was therefore taken from
+the training data: the largest staleness N at which the 90th percentile of
+training-cell fade over N cycles (centered 5-cycle median SoH, datasets
+weighted equally) stays within the 1 point gauge accuracy.
+
+| Staleness (cycles) | 1 | 2 | 3 | 4 | 5 | 6 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 90th percentile fade (points) | 0.19 | 0.39 | 0.60 | 0.78 | 0.95 | above 1 |
+
+N = 5 cycles. Within that window the interval formula is the same as
+`kutle-soh-measured-v1`; outside it the method does not grade.
+
+### Evaluation on NASA
+
+Rows from `eval_set_measured.csv` whose simulated update age is 0 to 5 cycles:
+211 of the 1023 registered rows (`eval_set_measured_fresh.csv`). The other 812
+would not be graded by this method.
+
+| Gauge noise | MAE | Baseline MAE, same rows | Coverage | Mean width | Grades more permissive than truth |
+| --- | --- | --- | --- | --- | --- |
+| sigma 0.5% (registered) | 113 bps | 1803 bps | 71.6% | 232 bps | 3 of 211 |
+| sigma 1% | 133 bps | 1803 bps | 61.6% | 232 bps | 3 of 211 |
+
+Coverage still falls short of 85%. With the update on the same cycle,
+coverage is 95.0% (see the measured method above); at 3 to 5 cycles of age
+fewer than half the readings stay within 1 point of the truth, because NASA
+cells often lose more than a point in three cycles and their capacity jumps
+back after rest periods. The limit was not tightened after seeing this.
+
 ## Consistency check
 
 Rule: flag a reading when the measured SoH falls outside the learned interval
@@ -174,11 +229,12 @@ half of the rows, chosen at random, had the reported SoH inflated.
 | +20 points | 49.9% | 82.3% | 39.0% | 0% |
 
 As a two-sided check it does not work on NASA: the learned interval misses the
-honest value 80% of the time, so most alarms are false. Checking only the upper
-bound (a reported capacity higher than the learned model allows) has no false
-alarms on these rows and catches 39% of 20 point inflations and almost nothing
-smaller. It is evidence for an audit, not a gate. It covers part of the risk in
-docs/SECURITY.md section 2.2 and only for gross inflation.
+honest value 80% of the time, so most alarms are false. The deployed tamper
+rule is therefore the upper-bound-only check: flag a reported SoH higher than
+the learned model allows, and submit BENCH_TEST for that reading. On these rows
+it raised 0% false alarms and detected 2.1% of +5 point, 7.4% of +10 point and
+39.0% of +20 point inflations. It covers part of the risk in docs/SECURITY.md
+section 2.2, and only for gross inflation.
 
 ## Data
 
@@ -192,12 +248,16 @@ about 75%). Held out: NASA PCoE. Licences and citations in `data/SOURCES.md`.
 
 | File | Role | SHA-256 |
 | --- | --- | --- |
+| measured_fresh_method.json | measured-fresh method parameters | see metrics.json |
+| eval_set_measured_fresh.csv | fresh rows used to evaluate it | see metrics.json |
 | model.json | learned model weights and interval tables | cf67878a0b59f596b4994252063c03d45bfe3a62c4a52ceca53ff4a751fc112d |
 | eval_set.csv | learned model evaluation rows | 265ca95baa439b220ed4c8fcd30581155a1e4b7216015397714b5ebcaeec863e |
 | measured_method.json | measured method parameters | 4df3db988451dc609d2e262130a6705923acf51269679a8bbfba9c8b1d160f26 |
 | eval_set_measured.csv | simulated gauge readings | bd9ac6dd2f6568ee6e388c96323cba67e53adccba39ba4b67ae727cb0c870fad |
 
-`metrics.json` has one entry per model id with `maeBps`, `baselineMaeBps`,
+`registry_submission.json` holds the `ModelRegistry.Model` fields for every
+registrable model id; it is empty because none is registrable. `metrics.json`
+has one entry per model id with `maeBps`, `baselineMaeBps`,
 `coverageBps`, `registrable`, both hashes and the registry payload. Inference
 for both methods and the combined grader is in `kutle_health/inference.py` and
 `js/infer.mjs`, tested to agree exactly on 50 inputs.
@@ -229,9 +289,12 @@ for both methods and the combined grader is in `kutle_health/inference.py` and
 ## Check against a real pack
 
 On the demo MacBook Air (bq40z651, 3 cells, cycle 170, last Qmax update at
-cycle 169) the learned model gave 95.2% with an interval of 79.3% to 104.8%
-after sweeping the unknown resistance reference (BENCH_TEST). The measured
-method gave 94.8% with 93.7% to 95.8% (REUSE). The two are consistent, and the
-combined grader submits the measured interval because the Qmax update is
-fresh, so the grade is REUSE. That grade rests on the gauge's own measurement
-and TI's accuracy figure, and not on the learned model.
+cycle 169, so 1 cycle old) the learned model gave 95.2% with an interval of
+79.3% to 104.8% after sweeping the unknown resistance reference. The
+measured-fresh method gave 94.6% with 93.5% to 95.7% (measured 94.7%). The
+tamper rule does not fire, and the grader would submit modelId
+kutle-soh-measured-fresh-v1, sohBps 9463, lowBps 9354, highBps 9566,
+rulCycles 432, which gradeFor turns into REUSE. Because that model id is not
+registrable, recordHealth would reject the submission today. The grade would
+rest on the gauge's own measurement and TI's accuracy figure, not on the
+learned model.

@@ -44,8 +44,8 @@ Two things stood out when we read the regulation next to how batteries are actua
 - Post-quantum signatures verified on chain, end to end, from a real battery gauge.
 - 112 passing contract tests including invariant fuzzing, symbolic proofs with Halmos, and mutation testing in which all 20 deliberately broken rules make the suite fail.
 - A private recycled-content proof generated in the browser in about a second.
-- An on-chain model registry strict enough to refuse our own learned model, and the honesty to report it.
-- Every required deliverable, including the security assessment and the climate impact assessment with sourced numbers.
+- An on-chain model registry strict enough to refuse our own learned model. We report that result in full.
+- Every required document, including the security assessment and the climate impact assessment with sourced numbers.
 
 ## What we learned
 

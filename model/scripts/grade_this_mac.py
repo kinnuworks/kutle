@@ -3,16 +3,17 @@
 Reads the pack through `ioreg -r -c AppleSmartBattery -a` (read only) and runs
 the same pure Python inference the passport system uses:
 
-  * the learned model (kutle-soh-learned-v2), which predicts SoH from the cycle
-    counter and resistance growth without seeing the measured capacity;
-  * the measured method (kutle-soh-measured-v1), which takes the gauge's
-    capacity over design capacity and widens it for gauge accuracy and for how
-    many cycles ago Qmax was last updated (CycleCount - CycleCountLastQmax).
+  * the measured-fresh method (kutle-soh-measured-fresh-v1), which takes the
+    gauge's full charge capacity over design capacity and grades it only when
+    the last Qmax update (CycleCount - CycleCountLastQmax) is fresh enough;
+  * the learned model (kutle-soh-learned-v2, not registered), which predicts
+    SoH without seeing the measured capacity. It is shown for information,
+    supplies the remaining-life estimate, and drives the tamper rule: a
+    measured SoH above the learned upper bound is flagged.
 
-It prints both intervals, the grade each would get under
-PassportRegistry.gradeFor, the consistency flag (measured SoH outside the
-learned interval), and the interval the combined grader would submit: the
-measured one when the Qmax update is fresh, otherwise the learned one.
+A stale, missing or flagged reading is not graded; the submission is then the
+interval 0% to 120%, which PassportRegistry.gradeFor turns into BENCH_TEST.
+The script prints the exact values that would be submitted on chain.
 
 Usage:
     .venv/bin/python scripts/grade_this_mac.py
@@ -36,7 +37,7 @@ sys.path.insert(0, str(ROOT))
 from kutle_health import inference  # noqa: E402
 
 MODEL = ROOT / "artifacts" / "model.json"
-MEASURED = ROOT / "artifacts" / "measured_method.json"
+MEASURED = ROOT / "artifacts" / "measured_fresh_method.json"
 
 # Without a stored first-use resistance the growth ratio is unknown. Training
 # cells reach a ratio of about 1.1 to 1.3 by the time they are at 80% SoH. A
@@ -112,6 +113,15 @@ def inputs_for(s: dict, r_ratio: float | None) -> dict:
     }
 
 
+def registrable(model_id: str):
+    """registrable flag from artifacts/metrics.json, or None if unknown."""
+    try:
+        m = json.loads((ROOT / "artifacts" / "metrics.json").read_text())
+        return m["models"][model_id]["registrable"]
+    except Exception:
+        return None
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--model", default=str(MODEL))
@@ -145,9 +155,14 @@ def main(argv=None) -> int:
     l_high = max(r["learned"]["soh_high_bps"] for r in runs)
     l_grade = inference.grade_for(l_low, l_high)
     meas = mid["measured"]
-    consistent = None if meas is None else (l_low <= meas["measured_bps"] <= l_high)
-    use_measured = meas is not None and meas["fresh"]
-    final_low, final_high = (meas["soh_low_bps"], meas["soh_high_bps"]) if use_measured else (l_low, l_high)
+    # Tamper rule on the envelope: flag only if the measured SoH is above every learned upper bound.
+    tamper = None if meas is None else meas["measured_bps"] > l_high
+    use_measured = meas is not None and meas["fresh"] and not tamper
+    if use_measured:
+        final_soh, final_low, final_high = meas["soh_bps"], meas["soh_low_bps"], meas["soh_high_bps"]
+    else:
+        final_soh = meas["soh_bps"] if meas is not None else mid["learned"]["soh_bps"]
+        final_low, final_high = 0, 12000
     final_grade = inference.grade_for(final_low, final_high)
 
     def env(key):
@@ -170,9 +185,11 @@ def main(argv=None) -> int:
             "interval_bps": [meas["soh_low_bps"], meas["soh_high_bps"]],
             "cycles_since_qmax_update": meas["cycles_since_update"], "fresh": meas["fresh"],
             "grade": meas["grade_name"]},
-        "consistent": consistent,
-        "submitted": {"source": "measured" if use_measured else "learned",
-                      "interval_bps": [final_low, final_high], "grade": inference.GRADE_NAMES[final_grade]},
+        "tamper_flag": tamper,
+        "submission": {"modelId": params["model_id"], "sohBps": final_soh, "lowBps": final_low,
+                       "highBps": final_high, "rulCycles": rul80[1], "grade": inference.GRADE_NAMES[final_grade],
+                       "source": "measured_fresh" if use_measured else "not_graded",
+                       "modelRegistrable": registrable(params["model_id"])},
         "rul80_cycles": {"low": rul80[0], "point": rul80[1], "high": rul80[2]},
         "rul60_cycles": {"low": rul60[0], "point": rul60[1], "high": rul60[2]},
     }
@@ -194,7 +211,7 @@ def main(argv=None) -> int:
     print(f"Temperature      now {s['temperature_c']:.1f} C, lifetime avg {s['life_avg_temp_c']} C, "
           f"max {s['life_max_temp_c']} C")
     print("")
-    print("Learned model (predicts; does not see the measured capacity)")
+    print("Learned model (predicts; not registered; shown for information)")
     print(f"  inputs         {', '.join(model['models']['soh']['features'])}; {r_note}")
     print(f"  SoH            {pct(mid['learned']['soh_bps'])}   interval {pct(l_low)} to {pct(l_high)} "
           f"(width {(l_high - l_low) / 100:.1f} points)")
@@ -203,28 +220,34 @@ def main(argv=None) -> int:
         print(f"  outside training range: {', '.join(ood)}")
     print("")
     if meas is not None:
-        print("Measured method (measures: full charge capacity / design capacity)")
+        print("Measured-fresh method (measures: full charge capacity / design capacity)")
         print(f"  measured       {pct(meas['measured_bps'])}, cycles since last Qmax update: {meas['cycles_since_update']:.0f} "
               f"({'fresh' if meas['fresh'] else 'stale'}, limit {params['fresh_cycles']})")
         print(f"  SoH            {pct(meas['soh_bps'])}   interval {pct(meas['soh_low_bps'])} to "
               f"{pct(meas['soh_high_bps'])} (gauge accuracy +/- {params['accuracy'] * 100:.0f} point, "
               f"plus staleness)")
-        print(f"  grade          {meas['grade_name']}")
+        print(f"  grade          {meas['grade_name'] if meas['fresh'] else 'not graded (stale reading)'}")
         if qmax_soh is not None:
             print(f"  note           mean Qmax / design is {qmax_soh * 100:.1f}%. Qmax is the low-rate chemical")
             print("                 capacity and reads above design; full charge capacity is the comparable figure.")
         print("")
-        print("Consistency check")
-        if consistent:
-            print("  measured SoH is inside the learned interval: no flag")
-        else:
-            print("  FLAG: measured SoH is outside the learned interval for this cell state")
+        print("Tamper rule (measured SoH above the learned upper bound)")
+        print("  FLAG: measured SoH is above the learned upper bound; reading not graded" if tamper
+              else "  no flag")
         print("")
-    print("Submitted by the combined grader")
-    print(f"  source         {'measured (fresh Qmax)' if use_measured else 'learned (no fresh Qmax)'}")
-    print(f"  interval       {pct(final_low)} to {pct(final_high)}")
-    print(f"  grade          {inference.GRADE_NAMES[final_grade]} (on-chain rule: high < 60% recycle, width > 10 "
-          f"points bench test, low >= 80% reuse, low >= 60% repurpose)")
+    print("Submission for PassportRegistry.recordHealth")
+    print(f"  modelId        {params['model_id']}")
+    print(f"  sohBps         {final_soh}")
+    print(f"  lowBps         {final_low}")
+    print(f"  highBps        {final_high}")
+    print(f"  rulCycles      {rul80[1]}")
+    reg = registrable(params["model_id"])
+    print(f"  grade          {inference.GRADE_NAMES[final_grade]} "
+          f"({'measured-fresh interval' if use_measured else 'not graded: stale, missing or flagged reading'})")
+    if reg is False:
+        print("  note           this model id did not pass the ModelRegistry rule on held-out data (see")
+        print("                 artifacts/metrics.json), so recordHealth would reject it until a model is registered.")
+    print("                 modelId is bytes32 on chain; the registrar maps the id string to it.")
     print("")
     print("Remaining useful life (learned RUL models, from the measured SoH)")
     print(f"  to 80% SoH     {rul80[1]} cycles  (interval {rul80[0]} to {rul80[2]})")
@@ -234,8 +257,8 @@ def main(argv=None) -> int:
     print("  The learned model was trained on single lab cells (CALCE LCO, Severson LFP); a 3-cell")
     print("  laptop pack is outside that domain and its interval is wide for that reason.")
     print("  The measured interval rests on TI's stated Impedance Track accuracy and on the gauge being")
-    print("  honest. The consistency check is the only cross-check, and with the learned interval this")
-    print("  wide it can only catch large inflation.")
+    print("  honest. The tamper rule is the only cross-check, and with the learned interval this wide it")
+    print("  can only catch large inflation.")
     print("  RUL is an extrapolation from lab cells cycled to end of life. Treat it as rough.")
     return 0
 
