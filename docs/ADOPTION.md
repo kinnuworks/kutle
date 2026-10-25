@@ -10,6 +10,16 @@
 | Recyclers | A premium for recycled metal that buyers can count toward their legal share | 2028 onward | Notes that a maker can spend into a passport, and an on-chain record that the metal came from real batteries |
 | Market surveillance authorities | Spot checks without asking each company for its database | 2027 onward | Read access to every passport, revocation that cascades, and a ledger that cannot be rewritten |
 
+## Dated milestones for Türkiye
+
+| Date | Milestone |
+|---|---|
+| November 2026 | Present at COP31 in Antalya; open the repository and testnet deployment to Turkish battery exporters |
+| Q1 2027 | Pilot targets: one pack assembler, one second-life operator and one recycler in the Marmara region, approached through the Istanbul Chamber of Commerce. None has committed yet |
+| 18 February 2027 | EU passport mandate starts; pilot passports issued for EU-bound packs |
+| August 2028 | Recycled-content documentation duty; ledger in use for documented shares |
+| August 2031 | Recycled-content minimums apply |
+
 ## Rollout
 
 1. **Pilot with one pack line (months 0 to 6).** One battery assembler, one second-life operator and one recycler in the Marmara region. Devices fitted at end of line, passports issued at shipping. Success measure: share of retired packs graded and routed without manual testing.

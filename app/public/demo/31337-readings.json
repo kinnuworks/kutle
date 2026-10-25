@@ -13358,5 +13358,257 @@
         63
       ]
     }
+  ],
+  "0x7ea0f3d7202ee2b7eced64e3fb9700bf7a9ddc363be1445dc602624a8c42be4b": [
+    {
+      "timestamp": 1792935072,
+      "cycleCount": 1153,
+      "designCapacity_mAh": 60000,
+      "fullChargeCapacity_mAh": 53076,
+      "packVoltage_mV": 11404,
+      "current_mA": -2759,
+      "temperature_centiC": 2511,
+      "stateOfCharge_pct": 55,
+      "cellVoltage_mV": [
+        3809,
+        3796,
+        3799
+      ],
+      "cellQmax_mAh": [
+        52916,
+        53133,
+        53279
+      ],
+      "cellResistance": [
+        58,
+        61,
+        61
+      ]
+    },
+    {
+      "timestamp": 1792935075,
+      "cycleCount": 1153,
+      "designCapacity_mAh": 60000,
+      "fullChargeCapacity_mAh": 53076,
+      "packVoltage_mV": 11188,
+      "current_mA": 10124,
+      "temperature_centiC": 2823,
+      "stateOfCharge_pct": 46,
+      "cellVoltage_mV": [
+        3724,
+        3739,
+        3725
+      ],
+      "cellQmax_mAh": [
+        52805,
+        53044,
+        53274
+      ],
+      "cellResistance": [
+        57,
+        59,
+        63
+      ]
+    },
+    {
+      "timestamp": 1792935078,
+      "cycleCount": 1153,
+      "designCapacity_mAh": 60000,
+      "fullChargeCapacity_mAh": 53076,
+      "packVoltage_mV": 10945,
+      "current_mA": -6358,
+      "temperature_centiC": 2835,
+      "stateOfCharge_pct": 36,
+      "cellVoltage_mV": [
+        3648,
+        3643,
+        3654
+      ],
+      "cellQmax_mAh": [
+        52853,
+        53033,
+        53261
+      ],
+      "cellResistance": [
+        58,
+        59,
+        62
+      ]
+    },
+    {
+      "timestamp": 1792935081,
+      "cycleCount": 1153,
+      "designCapacity_mAh": 60000,
+      "fullChargeCapacity_mAh": 53076,
+      "packVoltage_mV": 10716,
+      "current_mA": -6612,
+      "temperature_centiC": 2636,
+      "stateOfCharge_pct": 27,
+      "cellVoltage_mV": [
+        3566,
+        3578,
+        3572
+      ],
+      "cellQmax_mAh": [
+        52881,
+        53046,
+        53300
+      ],
+      "cellResistance": [
+        57,
+        60,
+        62
+      ]
+    },
+    {
+      "timestamp": 1792935084,
+      "cycleCount": 1153,
+      "designCapacity_mAh": 60000,
+      "fullChargeCapacity_mAh": 53076,
+      "packVoltage_mV": 10626,
+      "current_mA": 714,
+      "temperature_centiC": 3066,
+      "stateOfCharge_pct": 23,
+      "cellVoltage_mV": [
+        3544,
+        3539,
+        3543
+      ],
+      "cellQmax_mAh": [
+        52831,
+        53132,
+        53248
+      ],
+      "cellResistance": [
+        58,
+        60,
+        61
+      ]
+    },
+    {
+      "timestamp": 1792935087,
+      "cycleCount": 1153,
+      "designCapacity_mAh": 60000,
+      "fullChargeCapacity_mAh": 53076,
+      "packVoltage_mV": 10867,
+      "current_mA": -10564,
+      "temperature_centiC": 2548,
+      "stateOfCharge_pct": 33,
+      "cellVoltage_mV": [
+        3615,
+        3623,
+        3629
+      ],
+      "cellQmax_mAh": [
+        52864,
+        53071,
+        53258
+      ],
+      "cellResistance": [
+        58,
+        60,
+        62
+      ]
+    },
+    {
+      "timestamp": 1792935090,
+      "cycleCount": 1153,
+      "designCapacity_mAh": 60000,
+      "fullChargeCapacity_mAh": 53076,
+      "packVoltage_mV": 11119,
+      "current_mA": -10709,
+      "temperature_centiC": 2781,
+      "stateOfCharge_pct": 43,
+      "cellVoltage_mV": [
+        3710,
+        3709,
+        3700
+      ],
+      "cellQmax_mAh": [
+        52807,
+        53116,
+        53330
+      ],
+      "cellResistance": [
+        57,
+        59,
+        61
+      ]
+    },
+    {
+      "timestamp": 1792935093,
+      "cycleCount": 1153,
+      "designCapacity_mAh": 60000,
+      "fullChargeCapacity_mAh": 53076,
+      "packVoltage_mV": 11331,
+      "current_mA": 3354,
+      "temperature_centiC": 2995,
+      "stateOfCharge_pct": 52,
+      "cellVoltage_mV": [
+        3777,
+        3781,
+        3773
+      ],
+      "cellQmax_mAh": [
+        52903,
+        53041,
+        53293
+      ],
+      "cellResistance": [
+        58,
+        58,
+        61
+      ]
+    },
+    {
+      "timestamp": 1792935096,
+      "cycleCount": 1153,
+      "designCapacity_mAh": 60000,
+      "fullChargeCapacity_mAh": 53076,
+      "packVoltage_mV": 11558,
+      "current_mA": 7861,
+      "temperature_centiC": 2499,
+      "stateOfCharge_pct": 61,
+      "cellVoltage_mV": [
+        3845,
+        3848,
+        3865
+      ],
+      "cellQmax_mAh": [
+        52845,
+        53053,
+        53248
+      ],
+      "cellResistance": [
+        57,
+        60,
+        61
+      ]
+    },
+    {
+      "timestamp": 1792935099,
+      "cycleCount": 1153,
+      "designCapacity_mAh": 60000,
+      "fullChargeCapacity_mAh": 53076,
+      "packVoltage_mV": 11734,
+      "current_mA": 1778,
+      "temperature_centiC": 2918,
+      "stateOfCharge_pct": 68,
+      "cellVoltage_mV": [
+        3915,
+        3907,
+        3912
+      ],
+      "cellQmax_mAh": [
+        52856,
+        53084,
+        53336
+      ],
+      "cellResistance": [
+        57,
+        59,
+        61
+      ]
+    }
   ]
 }
