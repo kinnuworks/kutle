@@ -9,5 +9,11 @@ __pycache__/
 *.pyc
 .venv/
 .DS_Store
-circuits/**/target/
 model/data/raw/
+contracts/out-app/
+contracts/cache-app/
+contracts/.venv/
+contracts/deployments/31337.json
+device/.venv/
+device/gateway/data/
+app/dist/

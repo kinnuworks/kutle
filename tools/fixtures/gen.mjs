@@ -101,8 +101,17 @@ const keyA2 = await makeKey("deviceA-v2", deviceA, 2);
 const keyB1 = await makeKey("deviceB-v1", deviceB, 1);
 
 const root = (n) => keccak256(stringToHex(`readings-root-${n}`));
+
+// Batch 0 carries a real three-reading tree so tests can check a Merkle proof
+// against the real ReadingLog: leaf = keccak256(keccak256(reading)), sorted pairs,
+// an odd node is carried up unchanged.
+const pair = (a, b) => (BigInt(a) < BigInt(b) ? keccak256(a + b.slice(2)) : keccak256(b + a.slice(2)));
+const leaves = [0, 1, 2].map((i) => keccak256(keccak256(stringToHex(`reading-${i}`))));
+const n01 = pair(leaves[0], leaves[1]);
+const tree0 = { leaves, root: pair(n01, leaves[2]), proofForLeaf1: [leaves[0], leaves[2]] };
+
 const batches = [
-  await signBatch(keyA1, { deviceId: deviceA, passportId: 1n, seq: 0n, root: root(0), fromTs: T0 - 3600n, toTs: T0 - 1800n, count: 60 }),
+  await signBatch(keyA1, { deviceId: deviceA, passportId: 1n, seq: 0n, root: tree0.root, fromTs: T0 - 3600n, toTs: T0 - 1800n, count: 60 }),
   await signBatch(keyA1, { deviceId: deviceA, passportId: 1n, seq: 1n, root: root(1), fromTs: T0 - 1800n, toTs: T0, count: 60 }),
   await signBatch(keyA2, { deviceId: deviceA, passportId: 1n, seq: 2n, root: root(2), fromTs: T0, toTs: T0 + 600n, count: 20 }),
 ];
@@ -121,6 +130,7 @@ const out = {
   keyB1: strip(keyB1),
   degeneratePk: degenerateKey(),
   batches,
+  tree0,
 };
 
 mkdirSync(outDir, { recursive: true });

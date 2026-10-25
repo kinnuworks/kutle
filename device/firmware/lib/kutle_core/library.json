@@ -1,0 +1,8 @@
+{
+  "name": "kutle_core",
+  "version": "1.0.0",
+  "description": "Reading encoding, Merkle tree, digests and Keccak-256 (device/SPEC.md)",
+  "frameworks": "*",
+  "platforms": "*",
+  "build": { "flags": ["-std=c11"] }
+}

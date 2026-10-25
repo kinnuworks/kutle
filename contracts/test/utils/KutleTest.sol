@@ -93,7 +93,7 @@ abstract contract KutleTest is Test {
         bytes memory init = abi.encodePacked(
             hex"61", uint16(runtime.length), hex"80600c6000396000f3", runtime
         );
-        assembly {
+        assembly ("memory-safe") {
             a := create(0, add(init, 0x20), mload(init))
         }
         require(a != address(0) && a.code.length == runtime.length, "deployRaw");

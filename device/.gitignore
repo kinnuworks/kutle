@@ -1,0 +1,7 @@
+node_modules/
+.venv/
+gateway/data/
+provision/out/
+*.keystore.json
+firmware/.pio/
+firmware/sim/build/

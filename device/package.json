@@ -1,0 +1,27 @@
+{
+  "name": "@kutle/device",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "gateway": "node gateway/src/cli.ts",
+    "provision": "node provision/src/cli.ts",
+    "vectors": "node scripts/gen-vectors.ts",
+    "sim": "make -C firmware/sim",
+    "test": "node --test gateway/test/",
+    "test:e2e": "KUTLE_E2E=1 node --test gateway/test/e2e.test.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@noble/curves": "^2.4.0",
+    "@noble/hashes": "^2.4.0",
+    "@noble/post-quantum": "^0.7.1",
+    "viem": "^2.57.11"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  }
+}

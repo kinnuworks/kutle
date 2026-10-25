@@ -1,0 +1,13 @@
+{
+  "name": "mldsa_port",
+  "version": "2.0.0",
+  "description": "Builds the mldsa-native submodule (lib/mldsa-native) as one compilation unit",
+  "frameworks": "*",
+  "platforms": "*",
+  "build": {
+    "srcDir": "../mldsa-native/mldsa",
+    "srcFilter": ["-<*>", "+<mldsa_native.c>"],
+    "includeDir": "../mldsa-native/mldsa",
+    "flags": ["-std=c99", "-Wno-unused-function"]
+  }
+}

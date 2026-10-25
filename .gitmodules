@@ -10,3 +10,9 @@
 [submodule "contracts/lib/poseidon2-evm"]
 	path = contracts/lib/poseidon2-evm
 	url = https://github.com/zemse/poseidon2-evm
+[submodule "device/firmware/lib/mldsa-native"]
+	path = device/firmware/lib/mldsa-native
+	url = https://github.com/pq-code-package/mldsa-native
+[submodule "device/firmware/lib/secp256k1"]
+	path = device/firmware/lib/secp256k1
+	url = https://github.com/bitcoin-core/secp256k1

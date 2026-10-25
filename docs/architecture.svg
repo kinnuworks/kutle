@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" font-family="Inter, Helvetica, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <style>
+      .box { fill: #ffffff; stroke: #94a3b8; stroke-width: 1.2; rx: 8; }
+      .chain { fill: #eef6f1; stroke: #2f7d5b; stroke-width: 1.4; rx: 8; }
+      .off { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.2; rx: 8; }
+      .gov { fill: #fdf6ec; stroke: #b7791f; stroke-width: 1.2; rx: 8; }
+      .title { font-weight: 700; font-size: 14px; fill: #0f172a; }
+      .sub { fill: #475569; font-size: 12px; }
+      .lane { font-weight: 700; font-size: 12px; fill: #64748b; letter-spacing: 0.08em; }
+      .flow { stroke: #475569; stroke-width: 1.4; fill: none; marker-end: url(#arrow); }
+      .label { fill: #334155; font-size: 11.5px; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" fill="#ffffff"/>
+
+  <text x="40" y="40" class="lane">OFF CHAIN</text>
+  <text x="40" y="380" class="lane">ON CHAIN (BASE SEPOLIA)</text>
+  <line x1="40" y1="350" x2="1160" y2="350" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="6 6"/>
+
+  <!-- off-chain row -->
+  <rect x="40" y="70" width="230" height="110" class="off"/>
+  <text x="58" y="98" class="title">Battery + fuel gauge</text>
+  <text x="58" y="120" class="sub">TI bq40z651 over SMBus</text>
+  <text x="58" y="140" class="sub">cycles, Qmax per cell,</text>
+  <text x="58" y="158" class="sub">resistance, temperature</text>
+
+  <rect x="320" y="70" width="250" height="110" class="off"/>
+  <text x="338" y="98" class="title">Device (ESP32-S3)</text>
+  <text x="338" y="120" class="sub">Merkle tree of readings</text>
+  <text x="338" y="140" class="sub">signs each batch with</text>
+  <text x="338" y="158" class="sub">secp256k1 + ML-DSA-44</text>
+
+  <rect x="620" y="70" width="240" height="110" class="off"/>
+  <text x="638" y="98" class="title">Health model</text>
+  <text x="638" y="120" class="sub">state of health + interval</text>
+  <text x="638" y="140" class="sub">remaining cycles</text>
+  <text x="638" y="158" class="sub">beats a stated baseline</text>
+
+  <rect x="910" y="70" width="250" height="110" class="off"/>
+  <text x="928" y="98" class="title">Recycler + accredited lab</text>
+  <text x="928" y="120" class="sub">co-sign an EIP-712 assay:</text>
+  <text x="928" y="140" class="sub">recovered, loss, unprocessed</text>
+  <text x="928" y="158" class="sub">per element</text>
+
+  <rect x="320" y="210" width="250" height="100" class="off"/>
+  <text x="338" y="238" class="title">Provisioning station</text>
+  <text x="338" y="260" class="sub">key from seed, degeneracy floor,</text>
+  <text x="338" y="278" class="sub">prepared key blob, proof of possession</text>
+
+  <rect x="910" y="210" width="250" height="100" class="off"/>
+  <text x="928" y="238" class="title">Cell maker</text>
+  <text x="928" y="260" class="sub">proves in Noir (UltraHonk)</text>
+  <text x="928" y="278" class="sub">it owns unspent notes</text>
+
+  <!-- on-chain row -->
+  <rect x="40" y="410" width="250" height="110" class="chain"/>
+  <text x="58" y="438" class="title">DeviceRegistry</text>
+  <text x="58" y="460" class="sub">hybrid keys, rotation, revocation</text>
+  <text x="58" y="480" class="sub">ML-DSA-44 verified on chain</text>
+  <text x="58" y="500" class="sub">verifier pinned by code hash</text>
+
+  <rect x="330" y="410" width="240" height="110" class="chain"/>
+  <text x="348" y="438" class="title">ReadingLog</text>
+  <text x="348" y="460" class="sub">signed batch roots</text>
+  <text x="348" y="480" class="sub">sequence + time window</text>
+  <text x="348" y="500" class="sub">per-reading Merkle proofs</text>
+
+  <rect x="610" y="410" width="250" height="110" class="chain"/>
+  <text x="628" y="438" class="title">PassportRegistry</text>
+  <text x="628" y="460" class="sub">composition, recycled content</text>
+  <text x="628" y="480" class="sub">grade computed on chain</text>
+  <text x="628" y="500" class="sub">lineage, revocation cascade</text>
+
+  <rect x="910" y="410" width="250" height="110" class="chain"/>
+  <text x="928" y="438" class="title">ConservationLedger</text>
+  <text x="928" y="460" class="sub" font-size="11">input = recovered + loss + unprocessed</text>
+  <text x="928" y="480" class="sub">recovered ≤ processed × ceiling</text>
+  <text x="928" y="500" class="sub">input fixed by closed passports</text>
+
+  <rect x="610" y="560" width="250" height="90" class="chain"/>
+  <text x="628" y="588" class="title">ModelRegistry</text>
+  <text x="628" y="610" class="sub">weights, eval data, code hashes</text>
+  <text x="628" y="630" class="sub">refuses a model that loses to baseline</text>
+
+  <rect x="910" y="560" width="250" height="90" class="chain"/>
+  <text x="928" y="588" class="title">NotePool</text>
+  <text x="928" y="610" class="sub">Poseidon2 tree, nullifiers</text>
+  <text x="928" y="630" class="sub">UltraHonk spend verifier</text>
+
+  <rect x="40" y="560" width="530" height="90" class="gov"/>
+  <text x="58" y="588" class="title">KutleCouncil (2 of 3) → TimelockController</text>
+  <text x="58" y="610" class="sub">only admin of every contract; deployer renounced at deploy time</text>
+  <text x="58" y="630" class="sub">legal limits, physical ceilings and grading thresholds are compile-time constants</text>
+
+  <!-- flows -->
+  <path d="M270,125 L320,125" class="flow"/>
+  <text x="276" y="117" class="label">gauge</text>
+
+  <path d="M445,180 L445,410" class="flow"/>
+  <text x="452" y="390" class="label">anchor(batch, ECDSA, ML-DSA)</text>
+
+  <path d="M445,310 C445,350 165,350 165,410" class="flow"/>
+  <text x="200" y="338" class="label">registerDevice</text>
+
+  <path d="M570,465 L610,465" class="flow"/>
+  <path d="M330,480 L290,480" class="flow"/>
+  <text x="292" y="472" class="label">verify</text>
+
+  <path d="M740,180 L740,410" class="flow"/>
+  <text x="748" y="390" class="label">recordHealth</text>
+
+  <path d="M735,560 L735,520" class="flow"/>
+
+  <path d="M1035,180 L1035,410" class="flow"/>
+  <text x="1042" y="390" class="label">settle(assay)</text>
+
+  <path d="M910,465 L860,465" class="flow"/>
+  <text x="864" y="457" class="label">close</text>
+
+  <path d="M1035,520 L1035,560" class="flow"/>
+  <text x="1042" y="545" class="label">issue notes</text>
+
+  <path d="M1035,310 C1100,330 1160,520 1160,605 L1160,605" class="flow" stroke-dasharray="0"/>
+  <path d="M910,605 L860,560 L860,500" class="flow"/>
+  <text x="868" y="545" class="label">spend → recycled content</text>
+
+  <text x="40" y="720" class="sub">Green: smart contracts. Grey: off-chain parties and software. Arrows: transactions and checks.</text>
+</svg>

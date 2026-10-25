@@ -28,6 +28,7 @@ runs = 1024
 runs = 256
 depth = 64
 fail_on_revert = false
+show_metrics = true
 
 [profile.ci.fuzz]
 runs = 10000

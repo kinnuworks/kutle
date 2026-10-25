@@ -1,0 +1,9 @@
+{
+  "name": "kutle_device",
+  "version": "1.0.0",
+  "description": "Device keys, seed export and the gateway line protocol (device/SPEC.md sections 4 and 5)",
+  "frameworks": "*",
+  "platforms": "*",
+  "dependencies": [{ "name": "kutle_core" }, { "name": "mldsa_port" }, { "name": "secp256k1_port" }],
+  "build": { "flags": ["-std=c11"] }
+}
