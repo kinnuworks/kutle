@@ -8,6 +8,30 @@ From 18 February 2027 every EV, light-vehicle and industrial battery sold in the
 
 *Kütle* is Turkish for mass.
 
+## Judge guide: every requirement and where it is
+
+| Requirement | Where | Status |
+|---|---|---|
+| Working prototype | `app/` on a seeded local chain (`node app/scripts/dev-chain.mjs`, then `pnpm dev`); contracts in `contracts/` | Runs end to end locally; public testnet deployment is scripted (`contracts/script/Deploy.s.sol`, dry-run passed: 13 contracts, 42.8M gas) and is the next step |
+| Source code with documentation | this repository | Public |
+| Architecture diagram and technical specification | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/architecture.svg](docs/architecture.svg) | Done |
+| 3-minute video | link in the Devpost entry; script in [docs/VIDEO_SCRIPT.md](docs/VIDEO_SCRIPT.md) | Recorded by the builder |
+| Security and data-integrity assessment | [docs/SECURITY.md](docs/SECURITY.md) | Done |
+| Problem statement and solution overview, 2 pages | [docs/BRIEF.md](docs/BRIEF.md) | Done |
+| Climate impact assessment with projections | [docs/IMPACT.md](docs/IMPACT.md) | Done, sourced, assumptions labelled |
+| Implementation and adoption strategy | [docs/ADOPTION.md](docs/ADOPTION.md) | Done |
+| Scalability and sustainability roadmap | [docs/ROADMAP.md](docs/ROADMAP.md) | Done |
+| User testing results | [docs/USER_TESTING.md](docs/USER_TESTING.md) | Protocol ready; the session with a battery professional is scheduled, results will be added when it happens |
+
+| Weighted criterion | Evidence |
+|---|---|
+| Climate impact (30%) | Avoided emissions booked on chain at every second life; per pack 0.37 to 1.13 t CO2e allocated; recycled metal counted once, as the 2031 rules require ([IMPACT.md](docs/IMPACT.md)) |
+| Technical innovation and blockchain (30%) | ML-DSA-44 verified on chain, conservation ledger with an exact per-element equality, private recycled-content proofs (Noir, UltraHonk) verified on chain |
+| Feasibility (10%) | Firmware builds for ESP32-S3; real readings from a laptop battery; gas measured for every operation |
+| Data security and transparency (10%) | 112 tests, invariant fuzzing, Halmos proofs, 20 of 20 mutants killed, a registry that refused our own model |
+| User experience (10%) | Turkish and English app, one-battery story, attack console of real failing transactions |
+| Scalability and sustainability (10%) | Batched signatures, L2 costs, council and timelock governance, open standards ([ROADMAP.md](docs/ROADMAP.md)) |
+
 ## Judge path, 90 seconds
 
 1. Open the app (link below) and press **Follow one battery**. It walks one real pack, the battery in the laptop this was built on, from signed gauge readings to a grade, a second life and recycling.
