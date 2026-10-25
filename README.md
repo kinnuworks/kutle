@@ -15,13 +15,13 @@ From 18 February 2027 every EV, light-vehicle and industrial battery sold in the
 | Working prototype | `app/` on a seeded local chain (`node app/scripts/dev-chain.mjs`, then `pnpm dev`); contracts in `contracts/` | Runs end to end locally; public testnet deployment is scripted (`contracts/script/Deploy.s.sol`, dry-run passed: 13 contracts, 42.8M gas) and is the next step |
 | Source code with documentation | this repository | Public |
 | Architecture diagram and technical specification | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/architecture.svg](docs/architecture.svg) | Done |
-| 3-minute video | link in the Devpost entry; script in [docs/VIDEO_SCRIPT.md](docs/VIDEO_SCRIPT.md) | Recorded by the builder |
+| 3-minute video | link in the Devpost entry; script in [docs/VIDEO_SCRIPT.md](docs/VIDEO_SCRIPT.md) | Script ready; the recording is linked from the Devpost entry |
 | Security and data-integrity assessment | [docs/SECURITY.md](docs/SECURITY.md) | Done |
 | Problem statement and solution overview, 2 pages | [docs/BRIEF.md](docs/BRIEF.md) | Done |
 | Climate impact assessment with projections | [docs/IMPACT.md](docs/IMPACT.md) | Done, sourced, assumptions labelled |
 | Implementation and adoption strategy | [docs/ADOPTION.md](docs/ADOPTION.md) | Done |
 | Scalability and sustainability roadmap | [docs/ROADMAP.md](docs/ROADMAP.md) | Done |
-| User testing results | [docs/USER_TESTING.md](docs/USER_TESTING.md) | Protocol ready; the session with a battery professional is scheduled, results will be added when it happens |
+| User testing results | [docs/USER_TESTING.md](docs/USER_TESTING.md) | Protocol ready; results from a session with a battery professional will be added here once it takes place |
 
 | Weighted criterion | Evidence |
 |---|---|
