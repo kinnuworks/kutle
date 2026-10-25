@@ -1,7 +1,7 @@
 name: pages
 
 # Publishes the app as static files, reading the Base Sepolia deployment.
-# Runs only once app/src/config/deployments/84532.json exists.
+# Reads app/src/config/deployments/84532.json.
 
 on:
   push:
@@ -23,7 +23,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ hashFiles('app/src/config/deployments/84532.json') != '' }}
     defaults:
       run:
         working-directory: app
