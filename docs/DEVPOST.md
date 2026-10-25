@@ -36,7 +36,7 @@ Two things stood out when we read the regulation next to how batteries are actua
 
 - ML-DSA keys can be degenerate in a way that lets anyone forge signatures without the secret, and proof of possession does not catch it. We had to apply the verifier authors' registration rules exactly, including a check that runs on chain over all 1,024 coefficients of the key.
 - One ML-DSA verification costs about 1.2M gas, so the device signs a Merkle root over many readings, and any single reading can be proven later.
-- Recycled-content ledgers we studied capped output at input. That cap can be beaten by parking metal as "unprocessed" and claiming it later at 100%. We moved to an exact equality with a ceiling on each pass and proved the per-pass rule is inductive.
+- Recycled-content ledgers we studied capped output at input. That cap can be beaten by parking metal as "unprocessed" and claiming it later at 100%. We moved to an exact equality with a ceiling on each pass, proved the single-pass rule symbolically, and check multi-pass sequences with invariant fuzzing.
 - The Poseidon2 contract compiled above the EVM's contract size limit under our optimizer settings, so we use its canonical deployment and checked its outputs against the circuit's test vectors.
 
 ## Accomplishments that we're proud of
