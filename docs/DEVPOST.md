@@ -2,7 +2,7 @@
 
 ## Tagline
 
-A battery passport where recycled metal has to add up.
+A used battery's health record that nobody can fake, so good batteries get a second life instead of the shredder.
 
 ## Track
 
