@@ -1,0 +1,12 @@
+[submodule "contracts/lib/forge-std"]
+	path = contracts/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "contracts/lib/openzeppelin-contracts"]
+	path = contracts/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "contracts/lib/evm-ml-dsa-verifier"]
+	path = contracts/lib/evm-ml-dsa-verifier
+	url = https://github.com/fireblocks-labs/evm-ml-dsa-verifier
+[submodule "contracts/lib/poseidon2-evm"]
+	path = contracts/lib/poseidon2-evm
+	url = https://github.com/zemse/poseidon2-evm

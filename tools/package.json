@@ -1,0 +1,13 @@
+{
+  "name": "@kutle/tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "fixtures": "node fixtures/gen.mjs"
+  },
+  "dependencies": {
+    "@noble/hashes": "^2.4.0",
+    "@noble/post-quantum": "^0.7.1",
+    "viem": "^2.57.11"
+  }
+}

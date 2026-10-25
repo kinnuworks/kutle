@@ -1,0 +1,44 @@
+[profile.default]
+src = "src"
+out = "out"
+test = "test"
+script = "script"
+libs = ["lib"]
+# The ML-DSA-44 verifier we depend on is built and audited under exactly these
+# settings (lib/evm-ml-dsa-verifier/foundry.toml), so the whole tree uses them.
+solc_version = "0.8.30"
+evm_version = "osaka"
+via_ir = true
+optimizer = true
+optimizer_runs = 10000
+# Never let tests shell out. Fixtures are committed as hex instead.
+ffi = false
+fs_permissions = [{ access = "read", path = "./test/fixtures" }]
+remappings = [
+    "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+    "forge-std/=lib/forge-std/src/",
+    "mldsa/=lib/evm-ml-dsa-verifier/src/",
+    "poseidon2/=lib/poseidon2-evm/src/",
+]
+
+[fuzz]
+runs = 1024
+
+[invariant]
+runs = 256
+depth = 64
+fail_on_revert = false
+
+[profile.ci.fuzz]
+runs = 10000
+
+[profile.ci.invariant]
+runs = 1024
+depth = 128
+
+[profile.script]
+fs_permissions = [
+    { access = "read", path = "./lib/evm-ml-dsa-verifier/helpers" },
+    { access = "read", path = "./deploy" },
+    { access = "read-write", path = "./deployments" },
+]
