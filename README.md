@@ -2,6 +2,10 @@
 
 Like a car's service history, but for EV batteries, and impossible to fake. Good batteries get a second life instead of the shredder.
 
+A buyer looking at a used EV battery can't tell a worn pack from a good one, so good packs get shredded. Kütle gives every battery a history nobody can quietly edit.
+
+**Try it live:** [kinnuworks.github.io/kutle/#/verify/1](https://kinnuworks.github.io/kutle/#/verify/1). Your browser checks the real battery in our laptop against Base Sepolia (3 of 3 checks pass, including the post-quantum signature).
+
 - **Climate:** every pack moved from the shredder into a second life avoids building new storage. For the packs of one Turkish factory that is up to 12,000 t CO2 a year by the mid 2030s (scenario, assumptions in [docs/IMPACT.md](docs/IMPACT.md)).
 - **Blockchain:** battery readings signed twice (one signature is post-quantum) and checked on chain, a grade the seller can't pick, and a recycling ledger where metal has to add up.
 - **AI:** health models trained on public cell data. The contract only accepts a model that proves its accuracy on data it has never seen. Ours haven't passed yet, so we kept the rule and published the numbers.
