@@ -4,6 +4,8 @@ Like a car's service history, but for EV batteries, and impossible to fake. Good
 
 A buyer looking at a used EV battery can't tell a worn pack from a good one, so good packs get shredded. Kütle gives every battery a history nobody can quietly edit.
 
+**Watch the 3:31 film:** [youtu.be/kd-sNqu5z9E](https://youtu.be/kd-sNqu5z9E)
+
 **Try it live:** [kinnuworks.github.io/kutle/#/verify/1](https://kinnuworks.github.io/kutle/#/verify/1). Your browser checks the real battery in our laptop against Base Sepolia (3 of 3 checks pass, including the post-quantum signature).
 
 - **Climate:** every pack moved from the shredder into a second life avoids building new storage. For the packs of one Turkish factory that is up to 12,000 t CO2 a year by the mid 2030s (scenario, assumptions in [docs/IMPACT.md](docs/IMPACT.md)).
@@ -46,7 +48,7 @@ We tried to cheat every rule. The app's attack console sends those attempts as r
 | Working prototype | Live on Base Sepolia (app and verified contracts, see above); full story on a seeded local chain (`pnpm dev:chain` in `app/`) | Deployed and verified; real laptop readings anchored on testnet |
 | Source code with documentation | this repository | Public |
 | Architecture diagram and technical specification | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/architecture.svg](docs/architecture.svg) | Done |
-| 3-minute video | link in the Devpost entry; script in [docs/VIDEO_SCRIPT.md](docs/VIDEO_SCRIPT.md) | Script ready; the recording is linked from the Devpost entry |
+| Demo video (3–5 min) | [youtu.be/kd-sNqu5z9E](https://youtu.be/kd-sNqu5z9E) (3:31) | Done |
 | Security and data-integrity assessment | [docs/SECURITY.md](docs/SECURITY.md) | Done |
 | Problem statement and solution overview, 2 pages | [docs/BRIEF.md](docs/BRIEF.md) | Done |
 | Climate impact assessment with projections | [docs/IMPACT.md](docs/IMPACT.md) | Done, sourced, assumptions labelled |
@@ -111,7 +113,7 @@ We tried to cheat every rule. The app's attack console sends those attempts as r
 | Implementation and adoption strategy | [docs/ADOPTION.md](docs/ADOPTION.md) |
 | Scalability and sustainability roadmap | [docs/ROADMAP.md](docs/ROADMAP.md) |
 | User testing results | [docs/USER_TESTING.md](docs/USER_TESTING.md) |
-| 3-minute video | link below |
+| Demo video (3:31) | [youtu.be/kd-sNqu5z9E](https://youtu.be/kd-sNqu5z9E) |
 
 ## Run it
 
