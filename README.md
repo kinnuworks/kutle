@@ -61,7 +61,7 @@ From 18 February 2027 every EV, light-vehicle and industrial battery sold in the
 ## Run it
 
 ```bash
-git clone --recursive <repo-url> && cd kutle
+git clone --recursive https://github.com/kinnuworks/kutle && cd kutle
 ```
 
 Contracts (Foundry):
