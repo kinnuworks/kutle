@@ -1,0 +1,57 @@
+name: pages
+
+# Publishes the app as static files, reading the Base Sepolia deployment.
+# Runs only once app/src/config/deployments/84532.json exists.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "app/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ hashFiles('app/src/config/deployments/84532.json') != '' }}
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - run: pnpm install --frozen-lockfile
+      - name: Build for Base Sepolia
+        run: pnpm exec vite build
+        env:
+          VITE_CHAIN_ID: "84532"
+          VITE_RPC_URL: https://sepolia.base.org
+          VITE_APP_URL: https://kinnuworks.github.io/kutle/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
