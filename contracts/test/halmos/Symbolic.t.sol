@@ -89,6 +89,36 @@ contract SymbolicTest is Test {
         } catch {}
     }
 
+    /// Induction step for any number of passes. If a batch satisfies
+    /// recovered x 10,000 <= (input - pending) x ceiling before an assay, and
+    /// the assay is accepted, it still does afterwards. Together with the base
+    /// case (a fresh batch has nothing recovered), this covers every sequence
+    /// of assays, not just two.
+    function check_ceilingIsInductive_9900(uint64 input, uint64 pending, uint64 recovered, uint64 rec, uint64 loss, uint64 res)
+        public
+        view
+    {
+        _inductive(input, pending, recovered, rec, loss, res, 9_900);
+    }
+
+    function check_ceilingIsInductive_9800(uint64 input, uint64 pending, uint64 recovered, uint64 rec, uint64 loss, uint64 res)
+        public
+        view
+    {
+        _inductive(input, pending, recovered, rec, loss, res, 9_800);
+    }
+
+    function _inductive(uint64 input, uint64 pending, uint64 recovered, uint64 rec, uint64 loss, uint64 res, uint256 maxBps)
+        internal
+        view
+    {
+        vm.assume(pending <= input);
+        vm.assume(uint256(recovered) * 10_000 <= (uint256(input) - pending) * maxBps);
+        try h.check(pending, rec, loss, res, maxBps) {
+            assert((uint256(recovered) + rec) * 10_000 <= (uint256(input) - res) * maxBps);
+        } catch {}
+    }
+
     /// The grading rule never sends a pack to reuse or second life on an
     /// interval it does not support.
     function check_gradeIsSound(uint16 lo, uint16 hi) public pure {
@@ -126,6 +156,12 @@ contract SymbolicTest is Test {
 
     function testFuzz_twoPasses(uint64 p, uint64 r1, uint64 l1, uint64 s1, uint64 r2, uint64 l2, uint64 s2) public view {
         _twoPasses(p, r1, l1, s1, r2, l2, s2, 9_900);
+    }
+
+    function testFuzz_inductive(uint64 i, uint64 p, uint64 r, uint64 rec, uint64 l, uint64 s) public view {
+        p = uint64(bound(p, 0, i));
+        r = uint64(bound(r, 0, (uint256(i) - p) * 9_900 / 10_000));
+        _inductive(i, p, r, rec, l, s, 9_900);
     }
 
     function testFuzz_grade(uint16 lo, uint16 hi) public pure {

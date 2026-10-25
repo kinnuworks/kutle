@@ -17,3 +17,7 @@ contracts/deployments/31337.json
 device/.venv/
 device/gateway/data/
 app/dist/
+contracts/out-test/
+contracts/cache-test/
+contracts/out-deploy/
+contracts/cache-deploy/
