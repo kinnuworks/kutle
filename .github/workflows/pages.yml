@@ -40,7 +40,8 @@ jobs:
         run: pnpm exec vite build
         env:
           VITE_CHAIN_ID: "84532"
-          VITE_RPC_URL: https://sepolia.base.org
+          VITE_RPC_URL: https://base-sepolia-rpc.publicnode.com
+          VITE_FROM_BLOCK: "50178423"
           VITE_APP_URL: https://kinnuworks.github.io/kutle/
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -22,7 +22,7 @@ const S = defineStrings({
     filter: "Show",
     all: "All",
     groups: { ledger: "Recycling ledger", notes: "Recycled-metal notes", readings: "Readings and grades", governance: "Keys and models" } as Record<string, string>,
-    noDemo: "The attack console needs the seeded demo state and demo keys (scripts/dev-chain.mjs).",
+    noDemo: "On the public testnet the attack console is read-only. Run it locally with one command (pnpm dev:chain), or see a real refused replay on Base Sepolia: basescan tx 0x59bbae2c…5788c (BadSequence).",
   },
   tr: {
     eyebrow: "Saldırı konsolu",

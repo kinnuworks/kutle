@@ -7,6 +7,16 @@ Like a car's service history, but for EV batteries, and impossible to fake. Good
 - **AI:** health models trained on public cell data. The contract only accepts a model that proves its accuracy on data it has never seen. Ours haven't passed yet, so we kept the rule and published the numbers.
 - **Try to cheat it:** 12 attacks, each sent as a real transaction and refused with the contract's reason.
 
+## Live on Base Sepolia
+
+- **App:** https://kinnuworks.github.io/kutle/ (check passport #1 yourself: https://kinnuworks.github.io/kutle/#/verify/1)
+- **All 12 contracts verified on Sourcify.** For example ReadingLog [0xFcf673…75E0](https://sepolia.basescan.org/address/0xFcf673B7745b3c17BDB42d3f32634264941f75E0) and ConservationLedger [0x6d3beF…f787](https://sepolia.basescan.org/address/0x6d3beFF5F26D397c29AF0EDA0312D6808AF8f787). Full list in [contracts/deployments/84532.json](contracts/deployments/84532.json).
+- **Device registered**, both proofs of possession checked on chain (ECDSA and ML-DSA-44): [tx](https://sepolia.basescan.org/tx/0xc1853759029c1c295eac19ea997403e662e4ac0b203cd45ba1a4523346013b91)
+- **Real readings from the battery in our laptop** (170 cycles, 4,394 of 4,629 mAh), signed twice and anchored, 1.47M gas: [tx](https://sepolia.basescan.org/tx/0x4fa76c81caaf790e677589739f0b58e79bfc4cad1d6ec2205a03e28aa5bc957c)
+- **The same batch replayed, refused** with `BadSequence(1, 0)`: [tx](https://sepolia.basescan.org/tx/0x59bbae2ce03ffd8b4900a55a05c0d7d0475fb8dfe5b5911fd436e47bb6d5788c)
+
+The full demo story (recyclers, assays, private recycled-content proofs and all 12 attacks) runs on a local chain with one command, `pnpm dev:chain` in `app/`, because it replays 430 days of history.
+
 IEEE ClimateChain Global Hackathon 2026 · Track 3, Sustainable supply chains and circular economy (also touches Track 2, second-life storage, and Track 4, signed sensor data).
 
 From 18 February 2027 every EV, light-vehicle and industrial battery sold in the EU needs a digital passport (Regulation (EU) 2023/1542). From 2031 battery makers must also meet minimum shares of recycled cobalt, lithium, nickel and lead. Kütle issues the passport, keeps the battery's health history honest for the ten-plus years a passport must survive, decides whether a used pack should get a second life or go to recycling, and runs a ledger in which no gram of recycled metal can be counted twice or created out of nothing.
@@ -29,7 +39,7 @@ We tried to cheat every rule. The app's attack console sends those attempts as r
 
 | Requirement | Where | Status |
 |---|---|---|
-| Working prototype | `app/` on a seeded local chain (`node app/scripts/dev-chain.mjs`, then `pnpm dev`); contracts in `contracts/` | Runs end to end locally; public testnet deployment is scripted (`contracts/script/Deploy.s.sol`, dry-run passed: 13 contracts, 42.8M gas) and is the next step |
+| Working prototype | Live on Base Sepolia (app and verified contracts, see above); full story on a seeded local chain (`pnpm dev:chain` in `app/`) | Deployed and verified; real laptop readings anchored on testnet |
 | Source code with documentation | this repository | Public |
 | Architecture diagram and technical specification | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/architecture.svg](docs/architecture.svg) | Done |
 | 3-minute video | link in the Devpost entry; script in [docs/VIDEO_SCRIPT.md](docs/VIDEO_SCRIPT.md) | Script ready; the recording is linked from the Devpost entry |

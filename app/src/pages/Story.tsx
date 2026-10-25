@@ -118,7 +118,7 @@ const S = defineStrings({
     misses: "misses",
     spends: "spends",
     nullifiers: "nullifiers",
-    noDemo: "No demo data for this chain. The story needs the seeded passports from scripts/dev-chain.mjs.",
+    noDemo: "Live on Base Sepolia: passport #1 is the real battery in our laptop. Its readings are signed twice and both signatures are checked on chain. Check it yourself →",
     tryEyebrow: "Try it here",
     tryTitle: "Pick an attack. Send it. Watch it fail.",
     tryLead: "Each one is a real transaction, signed with a public testnet demo key and mined as reverted.",
@@ -248,7 +248,7 @@ const S = defineStrings({
     misses: "karşılamıyor",
     spends: "harcama",
     nullifiers: "nullifier",
-    noDemo: "Bu zincir için demo verisi yok. Hikâye, scripts/dev-chain.mjs ile tohumlanan pasaportlara ihtiyaç duyar.",
+    noDemo: "Base Sepolia'da canlı: 1 numaralı pasaport dizüstü bilgisayarımızın gerçek bataryası. Okumaları iki kez imzalanır ve iki imza da zincirde doğrulanır. Kendiniz kontrol edin →",
     tryEyebrow: "Burada deneyin",
     tryTitle: "Bir saldırı seçin. Gönderin. Başarısız olmasını izleyin.",
     tryLead: "Her biri gerçek bir işlemdir; herkese açık bir test ağı demo anahtarıyla imzalanır ve geri alınmış olarak bloğa girer.",
@@ -448,7 +448,7 @@ export function Story() {
             <div className="trust"><span>{chain.name}</span>{s.trust.map((t) => <span key={t}>{t}</span>)}</div>
           </div>
           <div className="hero__visual" style={{ marginTop: 0 }}>
-            {d ? <HeroWindow d={d} lang={lang} /> : <div className="stage" style={{ minHeight: 360, display: "grid", placeItems: "center" }}>{q.error != null ? <ErrorBox error={q.error} onRetry={q.reload} /> : q.loading ? <Loading /> : <span className="notice notice--warn">{s.noDemo}</span>}</div>}
+            {d ? <HeroWindow d={d} lang={lang} /> : <div className="stage" style={{ minHeight: 360, display: "grid", placeItems: "center" }}>{q.error != null ? <ErrorBox error={q.error} onRetry={q.reload} /> : q.loading ? <Loading /> : <a className="notice" href="#/verify/1" style={{ maxWidth: 520, textAlign: "center" }}>{s.noDemo}</a>}</div>}
           </div>
         </div>
       </section>
@@ -504,7 +504,7 @@ export function Story() {
             <p className="lead">{s.journeyLead}</p>
           </div>
           {q.loading && !d && <Loading />}
-          {!q.loading && d === null && <div className="notice notice--warn">{s.noDemo}</div>}
+          {!q.loading && d === null && <a className="notice" href="#/verify/1">{s.noDemo}</a>}
           {d && <Journey d={d} />}
         </div>
       </section>
