@@ -110,6 +110,7 @@ All admin roles sit with a `TimelockController` whose only proposer and executor
 | Unit tests (Foundry) | Every contract, every revert path listed above, with real ML-DSA-44 keys and signatures and a real UltraHonk proof | All passing |
 | Invariant fuzzing | Random feeding, honest and dishonest assays, issuance and revocation; 256 runs x 64 calls | Mass conservation, ceiling, issuance accounting, single intake and taint freeze all hold |
 | Symbolic proofs (Halmos) | Conservation arithmetic for every input; two-pass laundering; grading rule soundness and monotonicity | Proven |
+| Mutation testing | 20 hand-written mutants, each removing or loosening one rule (balance, ceiling, nonce, lab, signatures, taint, nullifiers, binding, ML-DSA result, degeneracy floor, sequence, device binding); `contracts/mutation/run.py` | 20 of 20 killed: every broken rule makes the suite fail |
 | Cross-implementation vectors | Poseidon2 (Noir vs EVM), ML-DSA blob builder (JavaScript vs the verifier), reading leaves and Merkle roots (TypeScript vs C) | Matching |
 | Static analysis | `forge lint` findings reviewed; calls in loops go only to fixed, code-hash-pinned contracts | Reviewed |
 

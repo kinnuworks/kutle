@@ -1,0 +1,122 @@
+[
+  {
+    "mutant": "conservation: balance as an inequality",
+    "file": "src/libraries/Conservation.sol",
+    "status": "killed",
+    "seconds": 41.4
+  },
+  {
+    "mutant": "conservation: no physical ceiling",
+    "file": "src/libraries/Conservation.sol",
+    "status": "killed",
+    "seconds": 61.6
+  },
+  {
+    "mutant": "conservation: ceiling on pending instead of processed",
+    "file": "src/libraries/Conservation.sol",
+    "status": "killed",
+    "seconds": 22.6
+  },
+  {
+    "mutant": "ledger: no assay nonce",
+    "file": "src/ConservationLedger.sol",
+    "status": "killed",
+    "seconds": 41.9
+  },
+  {
+    "mutant": "ledger: no lab accreditation",
+    "file": "src/ConservationLedger.sol",
+    "status": "killed",
+    "seconds": 7.6
+  },
+  {
+    "mutant": "ledger: recycler signature not checked",
+    "file": "src/ConservationLedger.sol",
+    "status": "killed",
+    "seconds": 8.2
+  },
+  {
+    "mutant": "ledger: issue more than recovered",
+    "file": "src/ConservationLedger.sol",
+    "status": "killed",
+    "seconds": 8.4
+  },
+  {
+    "mutant": "ledger: taint ignored by settle",
+    "file": "src/ConservationLedger.sol",
+    "status": "killed",
+    "seconds": 8.2
+  },
+  {
+    "mutant": "ledger: no deadline",
+    "file": "src/ConservationLedger.sol",
+    "status": "killed",
+    "seconds": 8.0
+  },
+  {
+    "mutant": "passports: closing does not change status",
+    "file": "src/PassportRegistry.sol",
+    "status": "killed",
+    "seconds": 13.5
+  },
+  {
+    "mutant": "passports: recycled content above composition",
+    "file": "src/PassportRegistry.sol",
+    "status": "killed",
+    "seconds": 11.7
+  },
+  {
+    "mutant": "passports: wide interval still grades",
+    "file": "src/PassportRegistry.sol",
+    "status": "killed",
+    "seconds": 11.2
+  },
+  {
+    "mutant": "passports: grade may cite any batch",
+    "file": "src/PassportRegistry.sol",
+    "status": "killed",
+    "seconds": 11.1
+  },
+  {
+    "mutant": "notes: nullifier reuse allowed",
+    "file": "src/NotePool.sol",
+    "status": "killed",
+    "seconds": 11.7
+  },
+  {
+    "mutant": "notes: duplicate nullifier in one spend",
+    "file": "src/NotePool.sol",
+    "status": "killed",
+    "seconds": 9.7
+  },
+  {
+    "mutant": "notes: binding left out of public inputs",
+    "file": "src/NotePool.sol",
+    "status": "killed",
+    "seconds": 9.7
+  },
+  {
+    "mutant": "devices: ML-DSA result ignored",
+    "file": "src/DeviceRegistry.sol",
+    "status": "killed",
+    "seconds": 12.7
+  },
+  {
+    "mutant": "devices: no degeneracy floor",
+    "file": "src/libraries/MLDSAKey.sol",
+    "status": "killed",
+    "seconds": 53.6
+  },
+  {
+    "mutant": "readings: no sequence check",
+    "file": "src/ReadingLog.sol",
+    "status": "killed",
+    "seconds": 48.7
+  },
+  {
+    "mutant": "readings: device not bound to passport",
+    "file": "src/ReadingLog.sol",
+    "status": "killed",
+    "seconds": 8.6
+  }
+]
