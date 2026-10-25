@@ -248,8 +248,8 @@ about 75%). Held out: NASA PCoE. Licences and citations in `data/SOURCES.md`.
 
 | File | Role | SHA-256 |
 | --- | --- | --- |
-| measured_fresh_method.json | measured-fresh method parameters | see metrics.json |
-| eval_set_measured_fresh.csv | fresh rows used to evaluate it | see metrics.json |
+| measured_fresh_method.json | measured-fresh method parameters | fa4c1e993c3973f2e72322a2a1cbf9f9eb1775e83c0424b6e05a6c0e6c7b4eb1 |
+| eval_set_measured_fresh.csv | fresh rows used to evaluate it | f8d7169c4ec2eb6de6bd673df4384fefa8831c85a458bca906883454356f4d52 |
 | model.json | learned model weights and interval tables | cf67878a0b59f596b4994252063c03d45bfe3a62c4a52ceca53ff4a751fc112d |
 | eval_set.csv | learned model evaluation rows | 265ca95baa439b220ed4c8fcd30581155a1e4b7216015397714b5ebcaeec863e |
 | measured_method.json | measured method parameters | 4df3db988451dc609d2e262130a6705923acf51269679a8bbfba9c8b1d160f26 |

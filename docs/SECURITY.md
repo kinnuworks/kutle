@@ -55,9 +55,17 @@ The grader role submits an estimate (state of health with a prediction interval,
 
 Residual risk: a grader could submit numbers its model did not produce. Every grade names the model by id, the weights are published by hash, and the reading batch is on chain, so anyone can re-run the model and compare. Moving inference into a zkML proof is on the roadmap. We kept it out of this build because it would prove that a model ran, not that its inputs were honest, and the inputs are already signed by the device.
 
-### 2.3a A rule that caught our own model
+### 2.3a A rule that caught our own models
 
-The model registry's rule (held-out error must beat the baseline, interval coverage at least 85%) was written into `ModelRegistry.sol` before any model was trained. When we evaluated the learned health model once on a dataset it never saw (NASA cells, trained on CALCE and Stanford/MIT cells), its interval coverage was 13% to 59%, far under the floor. The registry would refuse it, and we kept the rule. Grades now come from the gauge's own fresh capacity measurement with its stated uncertainty (about 40 bps error and 95% coverage on fresh readings), and stale readings can only produce "bench test". The learned model is used for remaining-life estimates and as an upper-bound tamper check, which raised no false alarms on honest held-out data. The full numbers, including the failed ones, are in `model/artifacts/metrics.json`. This is the oracle problem in miniature: a confident-looking estimator that would have over-claimed, stopped by a rule fixed in advance.
+The model registry's rule (held-out error must beat the baseline, interval coverage at least 85%) was written into `ModelRegistry.sol` before any model was trained. We evaluated three methods on NASA cells after training and calibrating on CALCE and Stanford/MIT cells:
+
+| Method | Held-out error | Baseline | Interval coverage | Registrable |
+|---|---|---|---|---|
+| Learned model (gradient boosting, cross-dataset conformal intervals) | 1,819 bps | 1,928 bps | 12.6% | no |
+| Gauge-measured capacity, any reading age | 240 bps | 1,928 bps | 58.9% | no |
+| Gauge-measured capacity, reading at most 5 cycles old (window fixed from training data) | 113 bps | 1,803 bps | 71.6% | no |
+
+All three beat the baseline; none reaches the coverage floor. Readings taken on the same cycle as the gauge's capacity update cover 95%, but we did not narrow the window after seeing that, because choosing the rule on the test set would defeat the test. The freshness rule itself was adopted after the first evaluation, which the model card discloses. So today no model is registered, and a public deployment can only grade packs as "bench test" until one passes. The demo chain uses a labelled demo model entry so the rest of the pipeline can be shown. The learned model's upper bound runs as a tamper check: on honest held-out readings it raised no false alarms, and it caught 39% of readings inflated by 20 points. This is the oracle problem in miniature: estimators that look precise, stopped by a rule fixed in advance. Full numbers: `model/artifacts/metrics.json`.
 
 ### 2.4 Recyclers and labs (the ledger's oracle)
 

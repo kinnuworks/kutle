@@ -16,7 +16,7 @@ Kütle is a battery passport whose data cannot be quietly rewritten, plus a ledg
 | Step | What happens | What makes it trustworthy |
 |---|---|---|
 | Signed readings | A microcontroller next to the battery's fuel gauge signs batches of readings with an Ethereum key and with ML-DSA-44, the post-quantum signature NIST standardised in 2024 | Both signatures are verified on chain; keys go through the verifier authors' registration safeguards, including a check on chain that rejects forgeable keys |
-| Health grade | State of health is measured from the gauge's fresh capacity measurement and stored with its uncertainty | The contract computes the grade from the interval (reuse, repurpose, bench test, recycle); only models registered with held-out results that beat a baseline can be cited |
+| Health grade | State of health with an uncertainty interval, from the gauge's own capacity measurement | The contract computes the grade from the interval (reuse, repurpose, bench test, recycle); only models whose held-out results beat a baseline with at least 85% coverage can be registered and cited |
 | Second life | A graded pack is handed over with a new passport linked to the old one | The contract books the avoided manufacturing emissions for the retained capacity |
 | Recycling | A recycler feeds packs into a batch; their passports close for good | For every metal: input = recovered + loss + unprocessed, and recovery cannot exceed what physics allows on any pass |
 | Recycled content | Recovered metal becomes private notes that a maker spends into a new battery's passport | A zero-knowledge proof shows the maker owns enough recycled metal; the share is public, the suppliers stay private, and a note can be spent once |
@@ -36,7 +36,7 @@ For a 60 kWh EV pack moved into second life at 70.5% retained capacity, avoided 
 - Solidity contracts with 112 passing tests, invariant fuzzing, symbolic proofs (Halmos) and mutation testing (20 of 20 broken rules caught).
 - ML-DSA-44 verified on chain from real keys and signatures, and a real UltraHonk proof verified on chain.
 - ESP32-S3 firmware that builds and matches the TypeScript gateway byte for byte; the gateway anchors real readings from a MacBook battery.
-- A health pipeline trained on public NASA, CALCE and Stanford/MIT data. Our own registry rule refused the learned model on a dataset it never saw, so grades use the measured-capacity method and the learned model is used for remaining-life estimates and an upper-bound tamper check. We report both results in [model/README.md](../model/README.md).
+- A health pipeline trained on public CALCE and Stanford/MIT data and tested once on NASA data. All three methods beat the baseline, and none yet meets our own 85% coverage rule (best: 71.6% for fresh gauge measurements), so no model is registered and a public deployment grades packs as bench test until one passes. We report every number in [model/README.md](../model/README.md).
 - A Turkish and English web app with an attack console of real failing transactions.
 
 ## Why it fits COP31

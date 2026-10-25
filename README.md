@@ -28,7 +28,7 @@ From 18 February 2027 every EV, light-vehicle and industrial battery sold in the
 | Climate impact (30%) | Avoided emissions booked on chain at every second life; per pack 0.37 to 1.13 t CO2e allocated; recycled metal counted once, as the 2031 rules require ([IMPACT.md](docs/IMPACT.md)) |
 | Technical innovation and blockchain (30%) | ML-DSA-44 verified on chain, conservation ledger with an exact per-element equality, private recycled-content proofs (Noir, UltraHonk) verified on chain |
 | Feasibility (10%) | Firmware builds for ESP32-S3; real readings from a laptop battery; gas measured for every operation |
-| Data security and transparency (10%) | 112 tests, invariant fuzzing, Halmos proofs, 20 of 20 mutants killed, a registry that refused our own model |
+| Data security and transparency (10%) | 112 tests, invariant fuzzing, Halmos proofs, 20 of 20 mutants killed, a registry that refused all three of our own health methods |
 | User experience (10%) | Turkish and English app, one-battery story, attack console of real failing transactions |
 | Scalability and sustainability (10%) | Batched signatures, L2 costs, council and timelock governance, open standards ([ROADMAP.md](docs/ROADMAP.md)) |
 
@@ -44,7 +44,7 @@ From 18 February 2027 every EV, light-vehicle and industrial battery sold in the
 |---|---|---|
 | Device signing | An ESP32-S3 next to the battery's fuel gauge signs every batch of readings with secp256k1 and ML-DSA-44 (FIPS 204). Both signatures are verified on chain | Firmware builds; host tests match the TypeScript gateway byte for byte; the laptop gateway anchors real readings from this MacBook's battery |
 | On-chain ML-DSA | Real post-quantum signature checks in Solidity, with the key-registration safeguards the verifier's safety report requires (degeneracy floor on chain, key de-duplication, code-hash pinning, proof of possession) | Tested with real keys and signatures |
-| Health model | State of health with a conformal prediction interval and remaining cycles, trained on public cell-ageing data and tested on a dataset it never saw against a linear-fade baseline | See [model/README.md](model/README.md) |
+| Health model | State of health with an interval and remaining cycles, trained on public cell-ageing data and tested once on a dataset it never saw | All methods beat the baseline; none yet meets the registry's 85% coverage rule, so none is registered ([model/README.md](model/README.md)) |
 | Passports | On-chain core of the Battery Pass record (DIN DKE SPEC 99100): metal content, recycled content, health grades, lineage, revocation | Grade computed on chain from the interval |
 | Conservation ledger | For every metal of every recycler batch: input = recovered + loss + unprocessed, recovery capped per pass, input fixed by closed passports, co-signed EIP-712 assays | Unit tests, invariant fuzzing, symbolic proofs |
 | Private recycled content | Recovered metal becomes notes in a Poseidon2 tree; a maker proves in zero knowledge (Noir, UltraHonk) that it owns enough to back a new battery. The share is public; the suppliers are not | Real proof verified on chain in the tests |

@@ -17,7 +17,7 @@ Two things stood out when we read the regulation next to how batteries are actua
 ## What it does
 
 - A microcontroller next to the battery's fuel gauge signs every batch of readings with two keys: a standard Ethereum key and ML-DSA-44, the post-quantum signature NIST standardised in 2024. The smart contract verifies both on chain. A passport must stay checkable long after the battery is recycled, past the point ECDSA can be trusted, and a forged history could pass a worn pack off as healthy.
-- State of health comes from the gauge's fresh capacity measurement with its stated uncertainty, and the contract computes the grade itself from the interval: reuse, repurpose, bench test or recycle. The chain only accepts health models whose results on data they never saw beat a baseline with at least 85% interval coverage. Our own learned model failed that rule on a held-out dataset, so it is used only for remaining-life estimates and as a tamper check, and we publish both results.
+- State of health comes from the gauge's fresh capacity measurement with its stated uncertainty, and the contract computes the grade itself from the interval: reuse, repurpose, bench test or recycle. The chain only accepts health models whose results on data they never saw beat a baseline with at least 85% interval coverage. None of our three health methods passes that rule yet on held-out NASA cells (the best, fresh gauge measurements, covers 71.6%), so no model is registered and grades stay at bench test until one does. We publish every number.
 - A second-life operator takes over a graded pack with a new passport linked to the old one. The contract books the manufacturing emissions avoided for the retained capacity.
 - At end of life, a recycler feeds packs into a batch. Their passports close for good, so the metal they held is the batch's input. A lab and the recycler co-sign the assay, and for every metal the contract keeps input = recovered + loss + unprocessed, with recovery capped at what physics allows on every pass.
 - Recovered metal becomes private notes. A battery maker proves with a zero-knowledge proof, generated in the browser, that it owns enough recycled metal to back a new battery. The recycled share is public, as the law requires. Which recycler supplied it stays private.
@@ -44,7 +44,7 @@ Two things stood out when we read the regulation next to how batteries are actua
 - Post-quantum signatures verified on chain, end to end, from a real battery gauge.
 - 112 passing contract tests including invariant fuzzing, symbolic proofs with Halmos, and mutation testing in which all 20 deliberately broken rules make the suite fail.
 - A private recycled-content proof generated in the browser in about a second.
-- An on-chain model registry strict enough to refuse our own learned model. We report that result in full.
+- An on-chain model registry strict enough to refuse all three of our own health methods. We report every number.
 - Every required document, including the security assessment and the climate impact assessment with sourced numbers.
 
 ## What we learned

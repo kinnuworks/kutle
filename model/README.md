@@ -8,22 +8,37 @@ the grader that combines them. The model card is `artifacts/MODEL_CARD.md`.
   remaining useful life (RUL) to 80% and 60% SoH.
 - `kutle-soh-measured-v1` measures SoH as capacity over design capacity, with
   an interval from TI's stated Impedance Track accuracy plus staleness.
-- The combined grader uses the measured interval when the gauge's last Qmax
-  update is fresh and the learned one otherwise, and flags a measured SoH that
-  falls outside the learned interval.
+- `kutle-soh-measured-fresh-v1` is the measured method restricted to readings
+  whose last Qmax update is at most 5 cycles old.
+- The deployed grader uses `kutle-soh-measured-fresh-v1` for fresh readings and
+  submits BENCH_TEST otherwise. The learned model is not registered; it
+  supplies the remaining-life estimate and the tamper rule (a measured SoH
+  above the learned upper bound is flagged and submitted as BENCH_TEST).
+
+Disclosure: the measured-fresh method and its freshness rule were adopted
+after the first NASA evaluation of `kutle-soh-measured-v1` showed that the
+staleness allowance from training data under-covers fast-fading cells. The
+5-cycle limit itself comes from training data only, but the decision to add a
+freshness rule followed the NASA result, so its NASA numbers are not a clean
+held-out test. The earlier results are kept unchanged.
 
 ## Results in one paragraph
 
-On held-out NASA cells neither method can be registered. The learned model
+On held-out NASA cells none of the three model ids can be registered, so
+`artifacts/registry_submission.json` is empty. The measured-fresh method, on
+the 211 rows with an update at most 5 cycles old, has 113 bps MAE against a
+1803 bps baseline but 71.6% coverage. Of the earlier two, the learned model
 beats the linear baseline (1819 vs 1928 bps MAE) but its interval, now
 calibrated only on out-of-domain residuals, covers 12.6% of rows. The measured
 method has 240 bps MAE but 58.9% coverage, because readings up to 30 cycles
 stale on fast-fading NASA cells exceed the staleness allowance taken from the
 training data; with fresh readings it covers 95.0% at 40 bps MAE. The
-consistency check flags 80% of honest readings as a two-sided test; checking
-only the upper bound gives no false alarms and catches 39% of +20 point
-inflations. On the demo Mac the two methods agree (learned 95.2%, measured
-94.8%) and the combined grader submits REUSE from the measured interval.
+consistency check flags 80% of honest readings as a two-sided test, so the
+deployed tamper rule checks only the upper bound: no false alarms, and it
+catches 2.1%, 7.4% and 39.0% of +5, +10 and +20 point inflations. On the demo
+Mac the reading is 1 cycle old, the tamper rule does not fire, and the grader
+would submit REUSE (93.5% to 95.7%) under `kutle-soh-measured-fresh-v1`, which
+recordHealth would reject today because that id is not registered.
 
 ## Layout
 
@@ -35,11 +50,12 @@ data/raw/                 downloaded data (gitignored)
 kutle_health/             loaders, features, training, calibration, export, inference
   calibration.py          leave-one-dataset-out interval calibration and swap test
   measured.py             measured-capacity method parameters
-  consistency.py          consistency flag and tamper evaluation
+  consistency.py          tamper rule (upper bound only) and its evaluation
 js/infer.mjs              dependency-free JavaScript inference for both methods
 scripts/grade_this_mac.py combined grader on this Mac's battery
-artifacts/                model.json, measured_method.json, metrics.json,
-                          eval_set.csv, eval_set_measured.csv, MODEL_CARD.md
+artifacts/                model.json, measured_method.json, measured_fresh_method.json,
+                          metrics.json, registry_submission.json, eval_set.csv,
+                          eval_set_measured.csv, eval_set_measured_fresh.csv, MODEL_CARD.md
 tests/                    pytest suite
 ```
 
@@ -66,8 +82,8 @@ python3.12 -m venv .venv
 .venv/bin/python scripts/grade_this_mac.py
 ```
 
-Training is deterministic: repeated runs produce byte-identical `model.json`,
-`measured_method.json`, `eval_set.csv` and `eval_set_measured.csv`. Parsed
+Training is deterministic: repeated runs produce byte-identical weights,
+parameter and evaluation files. Parsed
 datasets are cached in `data/raw/processed/`. The CALCE server stalls often;
 the downloader resumes and retries, and one process per cell
 (`--only calce --calce-cells CS2_35`) was much faster than one process for all.
@@ -131,13 +147,28 @@ times the same count.
 
 `artifacts/metrics.json` has one entry per model id.
 
-| | kutle-soh-learned-v2 | kutle-soh-measured-v1 |
-| --- | --- | --- |
-| maeBps | 1819 | 240 |
-| baselineMaeBps | 1928 | 1928 |
-| coverageBps | 1261 | 5894 |
-| registrable | false | false |
-| mean interval width | 1555 bps | 386 bps |
+| | kutle-soh-learned-v2 | kutle-soh-measured-v1 | kutle-soh-measured-fresh-v1 |
+| --- | --- | --- | --- |
+| maeBps | 1819 | 240 | 113 |
+| baselineMaeBps | 1928 | 1928 | 1803 (same 211 rows) |
+| coverageBps | 1261 | 5894 | 7156 |
+| registrable | false | false | false |
+| mean interval width | 1555 bps | 386 bps | 232 bps |
+
+Measured-fresh. TI documents the conditions for a Qmax update (rested OCV
+readings, at least 37% passed charge by default; SLYT402, SLUA364) but gives
+no cycle age after which Qmax is invalid. The limit is the largest staleness at
+which the 90th percentile of training-cell fade stays within 1 point: 0.95
+points at 5 cycles, above 1 at 6, so N = 5. On NASA rows with a simulated
+update 0 to 5 cycles old (211 rows):
+
+| Gauge noise | MAE | Baseline, same rows | Coverage | Mean width | More permissive than truth |
+| --- | --- | --- | --- | --- | --- |
+| sigma 0.5% | 113 bps | 1803 bps | 71.6% | 232 bps | 3 |
+| sigma 1% | 133 bps | 1803 bps | 61.6% | 232 bps | 3 |
+
+NASA cells often lose more than a point in three cycles and jump back after
+rests, so even 3 to 5 cycle old readings miss by more than the 1 point bound.
 
 The baseline is a straight line of SoH against cycle count fitted on the
 training cells, weighted like the model (1928 bps) and unweighted (1954 bps);
@@ -186,11 +217,14 @@ Consistency check as a tamper detector on NASA (half the rows inflated):
 | +20 points | 49.9% | 82.3% | 39.0% | 0% |
 
 The two-sided rule is useless here because the learned interval misses most
-honest values. The upper-bound rule is quiet on honest data and catches large
+honest values. The upper-bound rule, now the deployed tamper rule in the
+grader and in `js/infer.mjs`, raised no false alarms and catches large
 inflation some of the time.
 
 Registry payloads, with hashes, are under `models.<id>.registryPayload` in
-`metrics.json`. `codeHash` should be the commit that contains this folder:
+`metrics.json`. `artifacts/registry_submission.json` holds exactly the
+`ModelRegistry.Model` fields for each registrable model id and is currently
+`{}`. `codeHash` should be the commit that contains this folder:
 commit, re-run training (the artifact hashes do not change) and register with
 that commit.
 
@@ -204,31 +238,29 @@ Output on the demo MacBook Air (bq40z651, 3 cells, cycle 170, last Qmax update
 at cycle 169), shortened:
 
 ```
-Learned model (predicts; does not see the measured capacity)
+Learned model (predicts; not registered; shown for information)
   SoH            95.2%   interval 79.3% to 104.8% (width 25.4 points)
-  grade          BENCH_TEST
-  outside training range: r_ratio
-Measured method (measures: full charge capacity / design capacity)
-  measured       94.8%, cycles since last Qmax update: 1 (fresh, limit 50)
-  SoH            94.8%   interval 93.7% to 95.8%
-  grade          REUSE
-Consistency check
-  measured SoH is inside the learned interval: no flag
-Submitted by the combined grader
-  source         measured (fresh Qmax)
-  interval       93.7% to 95.8%
-  grade          REUSE
-Remaining useful life (learned RUL models, from the measured SoH)
-  to 80% SoH     430 cycles  (interval 103 to 894)
-  to 60% SoH     705 cycles  (interval 282 to 1672)
+Measured-fresh method (measures: full charge capacity / design capacity)
+  measured       94.7%, cycles since last Qmax update: 1 (fresh, limit 5)
+  SoH            94.6%   interval 93.5% to 95.7%
+Tamper rule (measured SoH above the learned upper bound)
+  no flag
+Submission for PassportRegistry.recordHealth
+  modelId        kutle-soh-measured-fresh-v1
+  sohBps         9463
+  lowBps         9354
+  highBps        9566
+  rulCycles      432
+  grade          REUSE (measured-fresh interval)
+  note           this model id did not pass the ModelRegistry rule on held-out data
 ```
 
-The measured value uses AppleRawMaxCapacity (full charge capacity). The
-per-cell Qmax values read about 104% of design because Qmax is the low-rate
-chemical capacity. The learned interval sweeps the unknown first-use
-resistance from 1.0 to 1.5 times; pass `--r0-mohm` if the first-use
-`WeightedRa` is known. The REUSE grade rests on the gauge's measurement and
-TI's accuracy figure. The learned model only confirms it is not wildly off.
+The measured value uses AppleRawMaxCapacity (full charge capacity); per-cell
+Qmax reads about 104% of design because it is the low-rate chemical capacity.
+A reading more than 5 cycles old, a missing reading, or a tamper flag gives
+lowBps 0 and highBps 12000, which gradeFor turns into BENCH_TEST. The learned
+interval sweeps the unknown first-use resistance from 1.0 to 1.5 times; pass
+`--r0-mohm` if the first-use `WeightedRa` is known.
 
 ## What did not work
 
@@ -238,4 +270,6 @@ TI's accuracy figure. The learned model only confirms it is not wildly off.
   features, all of which transferred worse between datasets.
 - The staleness allowance for the measured method on fast-fading cells.
 - The two-sided consistency check as a tamper detector.
+- The freshness rule did not lift the measured method to 85% coverage on
+  NASA either.
 - RUL to 60%, with nine training cells from one dataset.

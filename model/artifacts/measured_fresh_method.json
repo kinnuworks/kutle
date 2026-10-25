@@ -1,0 +1,19 @@
+{
+  "format": "kutle-measured-soh-v1",
+  "description": "SoH = measured capacity / design capacity, graded only when the last Qmax update is at most fresh_cycles old; staler readings are not graded (BENCH_TEST).",
+  "accuracy": 0.01,
+  "accuracy_source": "TI bq20z80 product page: 'Better than 1% Error Over Lifetime of the Battery'; TI SLUA364",
+  "fade_median_per_cycle": 0.00030177741788170345,
+  "fade_p90_per_cycle": 0.0012802994486181961,
+  "fade_source": "per-cycle SoH fade over 50-cycle windows in the training datasets, each dataset weighted equally",
+  "fresh_cycles": 5,
+  "model_id": "kutle-soh-measured-fresh-v1",
+  "freshness_source": "TI documents when a Qmax update can happen (two rested OCV readings, at least 37% passed charge; SLYT402, SLUA364) but gives no cycle age after which it is invalid. The limit is the largest staleness at which the 90th percentile of training-cell fade (centered 5-cycle median SoH, datasets weighted equally) stays within 1 point.",
+  "freshness_p90_fade_points_by_staleness": {
+    "1": 0.191,
+    "2": 0.394,
+    "3": 0.602,
+    "4": 0.782,
+    "5": 0.949
+  }
+}
