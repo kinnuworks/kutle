@@ -17,7 +17,7 @@ Two things stood out when we read the regulation next to how batteries are actua
 ## What it does
 
 - A microcontroller next to the battery's fuel gauge signs every batch of readings with two keys: a standard Ethereum key and ML-DSA-44, the post-quantum signature NIST standardised in 2024. The smart contract verifies both on chain. A passport must stay checkable long after the battery is recycled, past the point ECDSA can be trusted, and a forged history could pass a worn pack off as healthy.
-- A health model estimates state of health with a calibrated interval and the remaining cycles. The chain accepts only models that beat a simple baseline on data they never saw, and it computes the grade itself from the interval: reuse, repurpose, bench test or recycle.
+- State of health comes from the gauge's fresh capacity measurement with its stated uncertainty, and the contract computes the grade itself from the interval: reuse, repurpose, bench test or recycle. The chain only accepts health models whose results on data they never saw beat a baseline with at least 85% interval coverage. Our own learned model failed that rule on a held-out dataset, so it is used only for remaining-life estimates and as a tamper check, and we publish both results.
 - A second-life operator takes over a graded pack with a new passport linked to the old one. The contract books the manufacturing emissions avoided for the retained capacity.
 - At end of life, a recycler feeds packs into a batch. Their passports close for good, so the metal they held is the batch's input. A lab and the recycler co-sign the assay, and for every metal the contract keeps input = recovered + loss + unprocessed, with recovery capped at what physics allows on every pass.
 - Recovered metal becomes private notes. A battery maker proves with a zero-knowledge proof, generated in the browser, that it owns enough recycled metal to back a new battery. The recycled share is public, as the law requires. Which recycler supplied it stays private.
@@ -28,7 +28,7 @@ Two things stood out when we read the regulation next to how batteries are actua
 - Solidity contracts (Foundry), with the ML-DSA-44 verifier from Fireblocks Labs and the registration safeguards from its safety report: a degeneracy check on the key itself, de-duplication on the canonical key, code-hash pinning of every external call, and proof of possession with both keys.
 - A Noir circuit proved with UltraHonk (Barretenberg); Poseidon2 matched byte for byte between Noir and the EVM.
 - ESP32-S3 firmware in C with mldsa-native and libsecp256k1, plus a TypeScript gateway that reads this MacBook's battery gauge through ioreg. Shared test vectors keep the C and TypeScript encodings identical.
-- A gradient-boosted health model with split conformal intervals, trained on public NASA, CALCE and Stanford/MIT cell data, exported to JSON with matching Python and JavaScript inference.
+- A gradient-boosted health model with conformal intervals calibrated across datasets, trained on public CALCE and Stanford/MIT cell data and tested once on NASA data it never saw, exported to JSON with matching Python and JavaScript inference.
 - A React app in Turkish and English.
 - Governance by a 2-of-3 council behind a timelock; the deployer gives up every role at deploy time.
 
@@ -43,7 +43,8 @@ Two things stood out when we read the regulation next to how batteries are actua
 
 - Post-quantum signatures verified on chain, end to end, from a real battery gauge.
 - 112 passing contract tests including invariant fuzzing, symbolic proofs with Halmos, and mutation testing in which all 20 deliberately broken rules make the suite fail.
-- A private recycled-content proof that runs in about a quarter of a second in the browser.
+- A private recycled-content proof generated in the browser in about a second.
+- An on-chain model registry strict enough to refuse our own learned model, and the honesty to report it.
 - Every required deliverable, including the security assessment and the climate impact assessment with sourced numbers.
 
 ## What we learned
@@ -58,4 +59,4 @@ The hard part of "blockchain for supply chains" is the oracle, not the chain. Ev
 
 ## Built with
 
-solidity, foundry, halmos, noir, barretenberg, ultrahonk, ml-dsa, fips-204, poseidon2, eip-712, openzeppelin, base, viem, typescript, react, vite, esp32-s3, platformio, c, mldsa-native, libsecp256k1, python, lightgbm, scikit-learn, conformal-prediction
+solidity, foundry, halmos, noir, barretenberg, ultrahonk, ml-dsa, fips-204, poseidon2, eip-712, openzeppelin, base, viem, typescript, react, vite, esp32-s3, platformio, c, mldsa-native, libsecp256k1, python, scikit-learn, conformal-prediction
