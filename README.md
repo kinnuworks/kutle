@@ -1,6 +1,6 @@
 # Kütle
 
-A used battery's health record that nobody can fake, so good batteries get a second life instead of the shredder.
+Like a car's service history, but for EV batteries, and impossible to fake. Good batteries get a second life instead of the shredder.
 
 IEEE ClimateChain Global Hackathon 2026 · Track 3, Sustainable supply chains and circular economy (also touches Track 2, second-life storage, and Track 4, signed sensor data).
 

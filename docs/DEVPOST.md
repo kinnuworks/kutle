@@ -2,7 +2,7 @@
 
 ## Tagline
 
-A used battery's health record that nobody can fake, so good batteries get a second life instead of the shredder.
+Like a car's service history, but for EV batteries, and impossible to fake.
 
 ## Track
 
