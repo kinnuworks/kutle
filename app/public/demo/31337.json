@@ -1,0 +1,422 @@
+{
+  "chainId": 31337,
+  "generatedAt": "2026-10-25T13:20:00.815Z",
+  "roles": {
+    "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "council1": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+    "council2": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+    "council3": "0x90F79bf6EB2c4f870365E785982E1f101E93b906",
+    "manufacturer": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+    "grader": "0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc",
+    "repurposer": "0x976EA74026E726554dB657fA54763abd0C3a0aa9",
+    "authority": "0x14dC79964da2C08b23698B3D3cc7Ca32193d9955",
+    "registrar": "0x23618e81E3f5cdF7f54C3d65f7FBc0aBf5B21E8f",
+    "recycler": "0xa0Ee7A142d267C1f36714E4a8F75612F20a79720",
+    "lab": "0xBcd4042DE499D14e55001CcbB24a551F3b954096",
+    "secondLife": "0x71bE63f3384f5fb98995898A86B02Fb2426c5788",
+    "unaccreditedLab": "0xFABB0ac9d68B0B445fB7357272Ff202C5651694a",
+    "relayer": "0x1CBd3b2770909D4e10f157cABC84C7264073C9Ec"
+  },
+  "devices": {
+    "A": {
+      "deviceId": "0x37d3da6af2c578b7769185703efe632541cee3820f4f220ae8c95fcda6dc4f12",
+      "label": "fixture:deviceA-v1",
+      "operator": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+      "ecdsaSigner": "0x14976b86fac922e533cB74F0D7335260a5bFEc67",
+      "pkBlob": "0x95bd8d42f30351685e96c62eddc0d0613bf9a87a",
+      "pkHash": "0x11ca6d1603b732d460b1d4d1cdcb4b3469510964358b197ca82ebb4bdadc03bf",
+      "registerTx": "0x17c8073b9a228fffb449a7cd57fb2331335abd8a2396f741572609e92a2c822a"
+    },
+    "B": {
+      "deviceId": "0x5c0fffe9a697af120ed110980be48b71fddfd7e297779164a71cbad01c796e5c",
+      "label": "fixture:deviceB-v1",
+      "operator": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+      "ecdsaSigner": "0x5CD3acfd04c4C71779746AAD6cCaCD49e78Fe874",
+      "pkBlob": "0x2b574555158337cd46d47c2ca57e4698a1f04e70",
+      "pkHash": "0x9f10fb691f8760c9b9e072405b19570c9edba5e7a81f963133f193f2ada641f9",
+      "registerTx": "0xaa906511a48f4f6f46bb8b7d7b528473996396353e7ba5ed2a05344821af4751"
+    },
+    "R2": {
+      "deviceId": "0xaf592212ed27409cb7e37afd8a6f9866c699423a8dda9509ee797bc628c81dc6",
+      "label": "pack-r2",
+      "operator": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+      "ecdsaSigner": "0x6Ec33d02B94C320a7Ce80C0DA1ad6745F960304a",
+      "pkBlob": "0xc039b3b46814d8388e5205d37dd0d154d806f1f4",
+      "pkHash": "0x657fe01337438cfdde0d5c3fcd94c4d2534a1b28b58e9ad0c0328d07f9eaa76f",
+      "registerTx": "0xa71bed1b2b42bce94e78f7cd9120b4de13dc118f100131cae64a5792361b9e68"
+    },
+    "R4": {
+      "deviceId": "0xe36409fb1760a85a4feb35d1125ef623c817753a27da9765849e15489d52e10f",
+      "label": "pack-r4",
+      "operator": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+      "ecdsaSigner": "0x84B0fE76772074aA783d40ba09672E369dd38016",
+      "pkBlob": "0xdd8cb59289bf7e324a37f74f8abb16d9f133cb2e",
+      "pkHash": "0x178e9fcbc74ef567a8829505f21be1fc477850e5f17c149d2e0db60a4c0fa2d7",
+      "registerTx": "0xc57c143a2837395d07ddab9d3cbe49b708c9748a032043d95058ac83ab9045a7"
+    },
+    "R5": {
+      "deviceId": "0x64b2ffe74f4a68055e469872ae7f0378f2f463a103895b924da0ed7e2977e315",
+      "label": "pack-r5",
+      "operator": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+      "ecdsaSigner": "0xbD498AC4f81c069c852c11DC6D8Fd36a079438bc",
+      "pkBlob": "0xa534a0c5080535eae0dc5959fb6e1dda44905e0f",
+      "pkHash": "0x5cd1540cc53d5c461cff82d11acae100ecae6050aaf9d991845e4e0770813bd4",
+      "registerTx": "0xca3e7386bde8fc1c727365efb199266ccdebf07aa67f016fcb894f094566ec16"
+    },
+    "N1": {
+      "deviceId": "0xdb422d2d9ae0127511362e5bd74373f7b2aa14798dd7d97e191fde795353b5df",
+      "label": "pack-n1",
+      "operator": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+      "ecdsaSigner": "0xb9D4292D36E0480Cfe45b0a9279BEE24535087a2",
+      "pkBlob": "0x1b0fd9df9c444a4ceec9863b88e1d7cb3db621c0",
+      "pkHash": "0x90b0e43d53c2ffc0e6822237c8a7450225d0ef5b8a999e21433b68943e1568cd",
+      "registerTx": "0xdda527b1b43b14b0f2476999558e4ca08eb23515fd9bf4deffc12282c3a824b9"
+    },
+    "C": {
+      "deviceId": "0xc72e1772df319d5bde52c09d80ee87d2103e7a01499eb27e12c3069ac518659f",
+      "label": "pack-c-revoked",
+      "operator": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+      "ecdsaSigner": "0x03F7c9310b3349C83F29FE3Edb7e5684A0cE7F58",
+      "pkBlob": "0xe0e0dd37299c2d019658639fb01db4c312528d73",
+      "pkHash": "0xc530010261f3a3bc405550d292f283ed54ecd72f1a2e49dfc22003945ba9b1ed",
+      "registerTx": "0x571f8b571cea7b985e03984b4f167874e9d2aeb4a1b2239bab0e90c665be7b8e"
+    },
+    "S1": {
+      "deviceId": "0xb3b5c502c8918cf9d59ed5704242481a59e846a19f6b2b2a872a25eaa033a16b",
+      "label": "pack-s1",
+      "operator": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+      "ecdsaSigner": "0x6dA7A264E641d43ca8d8558f815cf81D7f0a7193",
+      "pkBlob": "0x446ae0f4be2110a900b6506f5e1379c1e4bdfc57",
+      "pkHash": "0xdb9c7fb91c1c72b49095ddecb74a6fe93526b46236a5fe747801ad22b90d7f06",
+      "registerTx": "0x1af5322a51f16c9d16331f028fbfbb9466e97f46423a2c7a71ac6b66362db770"
+    },
+    "S2": {
+      "deviceId": "0x84d30ae37e2b56f4393530a83edc80a8c637d8e27203cb7f95ab924c3404f2db",
+      "label": "pack-s2",
+      "operator": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+      "ecdsaSigner": "0x2BBa6Dee01D7b20c1799F4C7aAe920d084C6Eb39",
+      "pkBlob": "0x2b8380fca14b5f5c4a763bf38573a3c36a548c56",
+      "pkHash": "0xa0f5b02d313cf83f3b8a51a664ab169f175d6acc1243d5fbdf251f353ad2c262",
+      "registerTx": "0x8be666f119eeb34d3d6b671516841df598506f07f01dd1bfefea3a3355e50e7b"
+    },
+    "S3": {
+      "deviceId": "0x416e3dfb04ddb849ee5093ca445b00c3ad883f526d8c0afcf0a63b06ed023bd7",
+      "label": "pack-s3",
+      "operator": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+      "ecdsaSigner": "0x24072404071B6D86032141C72FEC16644d817966",
+      "pkBlob": "0xae8fee31128ea25c6924ffb6943fd6c70accbb7f",
+      "pkHash": "0x90cf90f067b77bad102186610c0a2df1336739d61fb3106093152e511f941086",
+      "registerTx": "0x1d1b7551b3e9a36e9c350279b514a72690c5187306cf274788fcbb529e7dd300"
+    },
+    "S4": {
+      "deviceId": "0x4e11ba24960b806896356a779c38c0cfb0e997b00d93215d97616fcfc3425f4d",
+      "label": "pack-s4",
+      "operator": "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65",
+      "ecdsaSigner": "0x2540C0Fa1D809f64c29a50fC8aF261BF85211dE6",
+      "pkBlob": "0xb2e8e647dc4388dda3bd52bea5402da4f1c9ca25",
+      "pkHash": "0x1918caa7f53d9345a30c0b0fe95a5c5e42b149ffe043205936c825e0b17c5558",
+      "registerTx": "0x17a7efb644026a90412d61417e9983bee29c4d2b91c0222f9cb0561c83664e04"
+    }
+  },
+  "passports": {
+    "1": {
+      "gs1": "https://id.kutle.example/01/08690000000017/21/KD60-000417",
+      "record": {
+        "batteryCategory": "EV",
+        "manufacturer": "Kütle demo cell plant, Gemlik (demo operator)",
+        "model": "KD-60 NMC811",
+        "chemistry": "NMC811 / graphite",
+        "nominalVoltage_V": 355,
+        "ratedCapacity_Ah": 169,
+        "manufacturedOn": "2023-03-05",
+        "carbonFootprint_kgCO2e_per_kWh": 72,
+        "hazardousSubstances": [
+          "none above Annex I thresholds"
+        ],
+        "warranty": "8 years or 160,000 km",
+        "deviceId": "0x37d3da6af2c578b7769185703efe632541cee3820f4f220ae8c95fcda6dc4f12"
+      },
+      "device": "A"
+    },
+    "2": {
+      "gs1": "https://id.kutle.example/01/08690000000017/21/KD60-000102",
+      "record": {
+        "batteryCategory": "EV",
+        "manufacturer": "Kütle demo cell plant, Gemlik (demo operator)",
+        "model": "KD-60 NMC811",
+        "chemistry": "NMC811 / graphite",
+        "nominalVoltage_V": 355,
+        "ratedCapacity_Ah": 169,
+        "manufacturedOn": "2017-03-14",
+        "carbonFootprint_kgCO2e_per_kWh": 72,
+        "hazardousSubstances": [
+          "none above Annex I thresholds"
+        ],
+        "warranty": "8 years or 160,000 km",
+        "deviceId": "0x5c0fffe9a697af120ed110980be48b71fddfd7e297779164a71cbad01c796e5c"
+      },
+      "device": "B"
+    },
+    "3": {
+      "gs1": "https://id.kutle.example/01/08690000000017/21/KD50-000088",
+      "record": {
+        "batteryCategory": "EV",
+        "manufacturer": "Kütle demo cell plant, Gemlik (demo operator)",
+        "model": "KD-50 NMC622",
+        "chemistry": "NMC622 / graphite",
+        "nominalVoltage_V": 355,
+        "ratedCapacity_Ah": 169,
+        "manufacturedOn": "2016-11-02",
+        "carbonFootprint_kgCO2e_per_kWh": 72,
+        "hazardousSubstances": [
+          "none above Annex I thresholds"
+        ],
+        "warranty": "8 years or 160,000 km",
+        "deviceId": "0xaf592212ed27409cb7e37afd8a6f9866c699423a8dda9509ee797bc628c81dc6"
+      },
+      "device": "R2"
+    },
+    "4": {
+      "gs1": "https://id.kutle.example/01/08690000000017/21/KD60-000131",
+      "record": {
+        "batteryCategory": "EV",
+        "manufacturer": "Kütle demo cell plant, Gemlik (demo operator)",
+        "model": "KD-60 NMC811",
+        "chemistry": "NMC811 / graphite",
+        "nominalVoltage_V": 355,
+        "ratedCapacity_Ah": 169,
+        "manufacturedOn": "2017-06-20",
+        "carbonFootprint_kgCO2e_per_kWh": 72,
+        "hazardousSubstances": [
+          "none above Annex I thresholds"
+        ],
+        "warranty": "8 years or 160,000 km",
+        "deviceId": "0xe36409fb1760a85a4feb35d1125ef623c817753a27da9765849e15489d52e10f"
+      },
+      "device": "R4"
+    },
+    "5": {
+      "gs1": "https://id.kutle.example/01/08690000000017/21/KD60-000139",
+      "record": {
+        "batteryCategory": "EV",
+        "manufacturer": "Kütle demo cell plant, Gemlik (demo operator)",
+        "model": "KD-60 NMC811",
+        "chemistry": "NMC811 / graphite",
+        "nominalVoltage_V": 355,
+        "ratedCapacity_Ah": 169,
+        "manufacturedOn": "2017-06-22",
+        "carbonFootprint_kgCO2e_per_kWh": 72,
+        "hazardousSubstances": [
+          "none above Annex I thresholds"
+        ],
+        "warranty": "8 years or 160,000 km",
+        "deviceId": "0x64b2ffe74f4a68055e469872ae7f0378f2f463a103895b924da0ed7e2977e315"
+      },
+      "device": "R5"
+    },
+    "6": {
+      "gs1": "https://id.kutle.example/01/08690000000017/21/KD60-000417-SL1",
+      "record": {
+        "batteryCategory": "industrial",
+        "manufacturer": "Kütle demo cell plant, Gemlik (demo operator)",
+        "model": "KD-60 NMC811",
+        "chemistry": "NMC811 / graphite",
+        "nominalVoltage_V": 355,
+        "ratedCapacity_Ah": 169,
+        "manufacturedOn": "2023-03-05",
+        "carbonFootprint_kgCO2e_per_kWh": 72,
+        "hazardousSubstances": [
+          "none above Annex I thresholds"
+        ],
+        "warranty": "8 years or 160,000 km",
+        "secondLife": "stationary storage for a 250 kWp rooftop solar site, Bursa",
+        "deviceId": "0x37d3da6af2c578b7769185703efe632541cee3820f4f220ae8c95fcda6dc4f12"
+      },
+      "device": "A"
+    },
+    "7": {
+      "gs1": "https://id.kutle.example/01/08690000000017/21/KD62-000001",
+      "record": {
+        "batteryCategory": "EV",
+        "manufacturer": "Kütle demo cell plant, Gemlik (demo operator)",
+        "model": "KD-62 NMC811",
+        "chemistry": "NMC811 / graphite",
+        "nominalVoltage_V": 355,
+        "ratedCapacity_Ah": 169,
+        "manufacturedOn": "2026-09-04",
+        "carbonFootprint_kgCO2e_per_kWh": 61,
+        "hazardousSubstances": [
+          "none above Annex I thresholds"
+        ],
+        "warranty": "8 years or 160,000 km",
+        "deviceId": "0xdb422d2d9ae0127511362e5bd74373f7b2aa14798dd7d97e191fde795353b5df"
+      },
+      "device": "N1"
+    },
+    "8": {
+      "gs1": "https://id.kutle.example/01/08690000000017/21/KD62-000002",
+      "record": {
+        "batteryCategory": "EV",
+        "manufacturer": "Kütle demo cell plant, Gemlik (demo operator)",
+        "model": "KD-62 NMC811",
+        "chemistry": "NMC811 / graphite",
+        "nominalVoltage_V": 355,
+        "ratedCapacity_Ah": 169,
+        "manufacturedOn": "2026-09-04",
+        "carbonFootprint_kgCO2e_per_kWh": 61,
+        "hazardousSubstances": [
+          "none above Annex I thresholds"
+        ],
+        "warranty": "8 years or 160,000 km",
+        "deviceId": "0xc72e1772df319d5bde52c09d80ee87d2103e7a01499eb27e12c3069ac518659f"
+      },
+      "device": "C"
+    },
+    "9": {
+      "gs1": "https://id.kutle.example/01/08690000000017/21/KD60-000210",
+      "record": {
+        "batteryCategory": "EV",
+        "manufacturer": "Kütle demo cell plant, Gemlik (demo operator)",
+        "model": "KD-60 NMC811",
+        "chemistry": "NMC811 / graphite",
+        "nominalVoltage_V": 355,
+        "ratedCapacity_Ah": 169,
+        "manufacturedOn": "2018-01-09",
+        "carbonFootprint_kgCO2e_per_kWh": 72,
+        "hazardousSubstances": [
+          "none above Annex I thresholds"
+        ],
+        "warranty": "8 years or 160,000 km",
+        "deviceId": "0xb3b5c502c8918cf9d59ed5704242481a59e846a19f6b2b2a872a25eaa033a16b"
+      },
+      "device": "S1"
+    },
+    "10": {
+      "gs1": "https://id.kutle.example/01/08690000000017/21/KD60-000220",
+      "record": {
+        "batteryCategory": "EV",
+        "manufacturer": "Kütle demo cell plant, Gemlik (demo operator)",
+        "model": "KD-60 NMC811",
+        "chemistry": "NMC811 / graphite",
+        "nominalVoltage_V": 355,
+        "ratedCapacity_Ah": 169,
+        "manufacturedOn": "2018-01-09",
+        "carbonFootprint_kgCO2e_per_kWh": 72,
+        "hazardousSubstances": [
+          "none above Annex I thresholds"
+        ],
+        "warranty": "8 years or 160,000 km",
+        "deviceId": "0x84d30ae37e2b56f4393530a83edc80a8c637d8e27203cb7f95ab924c3404f2db"
+      },
+      "device": "S2"
+    },
+    "11": {
+      "gs1": "https://id.kutle.example/01/08690000000017/21/KD60-000230",
+      "record": {
+        "batteryCategory": "EV",
+        "manufacturer": "Kütle demo cell plant, Gemlik (demo operator)",
+        "model": "KD-60 NMC811",
+        "chemistry": "NMC811 / graphite",
+        "nominalVoltage_V": 355,
+        "ratedCapacity_Ah": 169,
+        "manufacturedOn": "2018-01-09",
+        "carbonFootprint_kgCO2e_per_kWh": 72,
+        "hazardousSubstances": [
+          "none above Annex I thresholds"
+        ],
+        "warranty": "8 years or 160,000 km",
+        "deviceId": "0x416e3dfb04ddb849ee5093ca445b00c3ad883f526d8c0afcf0a63b06ed023bd7"
+      },
+      "device": "S3"
+    },
+    "12": {
+      "gs1": "https://id.kutle.example/01/08690000000017/21/KD60-000240",
+      "record": {
+        "batteryCategory": "EV",
+        "manufacturer": "Kütle demo cell plant, Gemlik (demo operator)",
+        "model": "KD-60 NMC811",
+        "chemistry": "NMC811 / graphite",
+        "nominalVoltage_V": 355,
+        "ratedCapacity_Ah": 169,
+        "manufacturedOn": "2018-01-09",
+        "carbonFootprint_kgCO2e_per_kWh": 72,
+        "hazardousSubstances": [
+          "none above Annex I thresholds"
+        ],
+        "warranty": "8 years or 160,000 km",
+        "deviceId": "0x4e11ba24960b806896356a779c38c0cfb0e997b00d93215d97616fcfc3425f4d"
+      },
+      "device": "S4"
+    },
+    "story": 1,
+    "storyChild": 6,
+    "newBattery": 7,
+    "target": 8,
+    "spares": [
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "batches": {
+    "settled": 1,
+    "pending": 2
+  },
+  "txs": {
+    "settle": "0x13e7d4b705ea69142d8fd77e9f622c19b33277b28afd9df28122fd6d1bc53968",
+    "notesCobalt": "0xd467cf3955be1a3e1863253043209f70cb0cfd1de0133ac986078526c9cfe7a7",
+    "notesLithium": "0xc97530f17c7c0d8a05f2398d6f8d4a7eec0388e2c7643ade0fbf8fa9bf9e6b84",
+    "notesNickel": "0xab4fda90d542a7e20c09333919266ef85a639ececafdd9709be0ac18dc6ced11",
+    "notesAttacker": "0xe636b655e4ceb3b6683c428e0dec04fa2fdfc4010ea1b76ecdbb3926852d159e",
+    "repurpose": "0xb68f611d815b5ef078b161eeb3c543e6aef3e99fa5cc0358979893e55d63a7ca",
+    "revokeKey": "0xfb9b7643d279b357bff27ac55cc21f4d4fd7db769f571ee1a752802f8c064325",
+    "spendCobalt": "0x14c86ffdf3a79eae0d65e53c47291606c03379fecb54e088c3caf4f7f7e93be4",
+    "spendLithium": "0x1eac96d31976dc45f6e54b3d838406b9a086fdda2f1cf255b07baf11b3e1a16c",
+    "badModelProposal": "3"
+  },
+  "notes": {
+    "proofTimingsNode": {
+      "witnessMs": 110,
+      "proveMs": 624,
+      "verifyMs": 131
+    },
+    "heldBackProof": {
+      "provenFor": 7,
+      "args": [
+        "7",
+        0,
+        "500",
+        "9401185447402341816850586421282747001804649718033457225617071388640692601793",
+        [
+          "12951126636746205124515639137007934497638773306826754646382011235723393906712",
+          "0",
+          "0",
+          "0"
+        ],
+        "0",
+        "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000213abbe9be546d11165683e442bdff0926a4dcaff415becc84d7d151ab2c4e690072d59e04dab733b3c737d073c37d4f6982d913b0bffec9f603caa7dffc7aef208a8c9f8ef5c15c44aa5a9f6af6ea0c1148a37a7d71e9a06b31bae65f5aff232e038a0e160a6b2d9e1c3f5428f4b641173dbef354c6f7b3462fc09eec939fe50c24b866cd033e3fd7baf4307bcdb3c98b8dbbbc6580a85a5b48da72ad896ba40c6f24abcb216268702009815554526d7e36498099e8cf88517f2705ab74435b1759ec158a2c2ef2616c1f6327396f0707cb230b584efe2a5ee1426cec1368e80f79592d7444d38830c4040d95473323ba07587d7e68d7fafa6b09633b88e2d520ce474103ce1b731c2212c40131c0a4995cd2b5d2023adad1b126f3b75863c62cc1543ab09946f4ea4171683fcc78a03f263991b22f66a6187e500a222ecdbf190deacecdc00493b3723934fd54f507ec97ee44a467efe6796ff55bf35fa4eb11b6e45b183b2bd7916da013a4adf5e2c05c54f07a4aaf3eb543de67ec7bb478287543674e1ff53f13f5670708bdf37d25c939858cded3e8e1afa60d2837f4671949aa539a5fb8cc466a1d3cdd3f1f2ec3e484275a876a52343840c9ba0ccb4008c2a169310e3d1b7cf60c01bc21104bddb60bd22b8e6669176c26950a7186cf1c00058791b0c9a54ba54f0054eb41b2dd0089414ba14839954a1065defa4f1f14aee0b6d7ecde3ba68db0b7502a589dbba5832d12f9850cc54986304a53a1b91b782417ad7079e335395cf27aed4f9b6fcee0c57d105e5d279b32654061d2890a61e87cb217cbe2b29ee8f72cdf5b266d5f8a3ca670e4b3594b4cb8aa9794ea103308ca3f50c40dfdf0e71e5f95bd2112b9f4d3467c48b1a5e8071dc5f8001d144d80da88db2650e97c0426578ad4fde528c242c467f45ec094643bb2fa55ea22ce421a86aa36fab59fbbe12e2f736a18c63c395894b81861be1172d5be0b321da99367b0408ab1e124aa5b78802a4abd69a1d4b5ac4576587593c9bee7f251237d0e2f21ea54889570fd9f016cfeabba55e4cedb825c2bed0d180a6ebed0ef2fec5daf4a28725a44ce2142976b3bd5d532aad6bf0860e25e11949885465075184a0581746600eae173b21196d0810747c2495801290398ddffb095c7068b521567b0a6aa0620b9aef69b8695b345ffbde26255d6052a274dbc4c8dc66f0b4e285cfa14d6199da18a1915c0895d1d5b6fa3b8244792525740490ded52dd5685155f35cb2f5ee02096967e5501dd3e0d3fa3fb86a7fc1291353aaee1c5daff220cf2b9b7804c79d65bf09cd170ed227f19bf6d65449b85192ee60032623c1c660d7ca100024191aa75d1415ea9bdcb36f0fe675957b3228a3a3df96e9050ff080ceac6a5ebcaeabfd45d5421dd7108b97cf603842b42ef01de1916e2019e7b33132c05df6f598c024f6c5a10acbc0f608ff1cd342c6021c6181f6a23c05dad13303b4329988fe3573947d5fb4d5ef09877cb149e2f6093659f6e987161c9d4f0121367aec53b6695a2ea9dadd745a2e6c9407d101cafe8841c7d88230e97b5bf2473615719f006c56178106dc711d27bd8baeaafdd081674c33e464f6b0cc8152357edcd0edc08fd12701fb5d3207859a30d596f8d64aab5c80c421eb55608fd27de2fefe04523efa72df06b4a99761e274aa5a772be84521a91e34a02da0d261704aa0c486b9504b48d19e746bef444fbfd85e31affa1d139b309bb4253f5bb0b05b415af988c7111f30e2cf13282ef6a46d73857e33073af516603688cda1d06c1afc7308abbbd3c0eb214460627e5449d3e948658b42b3890b6125e58bfc908c914dfdbf445ecbb0661042ea043d78888e112ac02c3f70d27412611ec955a05b0ab3b1cf689da757fcc65a9ffd53179559f940812b898c54ac7f4f956adfb15a57d7ecccc731e80f2007575853df154e9afef35eba95b740b44e11c67050906a167793da4b578575c5fe17eef77148d875f2bd6df829be6b10a36cc0fb94b11b5aff1af112a87ddbed374510eed79260517e279f44c7ff78c9fe5b3ab84301cf423c5d4ca425b72a018af8670d4a524dc7e3842142dbd2afca91c8fc66aa400a3f36e39e571237e8892f6af0619046a37010e5104326de34b02a9c821129c2bb3020c081276730cb19b8966b8a270f9195dab63a89c8c282f5dfe5e7b4b47248bae9d01b1260d2f92a9d74066f845f8dfb478b6a60a5f1891a90dba5a8c5320915686e8c086fe62763e7c8729d694f6c424f692012929fb9cd1fa5eb96d1b2b24c6c74b23539d8aa878f6a43463cd78c96ea7543d2dfd7e575e8d679f877e2f1ee2ada521d4d0f4d9c6a6f9cc38d36582deed4ae0ebbda67632f090b1dbd6254eac4dbac55893005231be194c15c07e21adfe313731da0991ced1cfcbafdc0e4ce574c0d08a7ba0b21e8dc335a1808c8acdec49175a2fa1d383d7733bcadd29eb533d26e77b0d1aa077019ed86e5f77e49b1ede666048f565f0e49065664e25c3defd848f435db5d9f8c66c854262c95863c8002440039003ba2eab62cbda1368b71aaf8a825aae883d63f794846cd00ce44a8bbae0e8d55b6081838cfed421a0d36cdd4f0d2636a930918dd519fed55a476448032b96fabac3a3afc663e918075a3b200bf5b76fc3444818fc5f531a2b2785b3e39e7a64b6833e5dc2d277062587c0615c78d0ae48307401fdd409296dcad144325d81c841e0a345d539411398516f095465200f50ee6afdf25b420ce3c1a8727dedc7eaf81ef6df80cae21261a96274ea1676f317a8c96865b24b8e7002bd7cb3e7eb8537d08ef904841e2ee7c6ae54261e23d52652d07a9f30017bd4e529b61c3db67f0fdd1e6821bf362a916a26367b565b2dc0de5f2ba49ecfc5640ef7c223442287df7e30ebbd5426079e7739bd3b45d667cdf62762659229d3af70a15c744be1980652a6ecca7f4b2166a03fa384a706d1aef9d303f028387ccd1c5329e47677709a17c9541534f8296522a6fa4b59573daf5b1b485f64c9a2277deb271a1f2fa3a1bbae408d12f3220a6cde22c9cdfa754cd9970eca1f0723a52e3d1b8338ffe619aeda3ba256ca1c5d6520f366c7ef08b65e91832f9129e4268f4202eac1bcd93c843d5b1da11e28ecb51337b23cc8da82d613fc971d9dd8f1cc74bc334efc63aaebd83d1d33ad19b3bcecdec1625bd4b1ec224de595575c3ff015639e3d921c9f51c21639df4018d10a7147b1a58b5650562515376ba151f96baf1c935740ee8375240867833423baeecb63bfcc9c213f14b228256584606339aa25a7d5b2a523a434275caa351299a5787d493aaee9ed2d522922c9022c22b375351f7b7c9e9abbfd35ceec901269680dc9d41c730279eb49738329432135c86f121e603e6da4c1f38122dfc3037588f237577a98c76a0f968cc5d8ed7efc50e2090cfbc50cd607db4bbf18bd09d599a37f45303d41d4d2dcf81f463b9c13f457b3af9888414cdd6f1d93720e1156b0eef9260642230927e5cc4be4fd3bfe4fa6420ed1dff5764719a4a87d2424253b9d63db6be3dbab04804cf9fd5efd9855217c74da4ea442d89f2817f4b30535d60225530f2f027132dac77542fe5275eef1f7143ba12be8b0ee724a81c21764a4d1d87410bb1de834425435b799b2c9732201ee610d32e6b4461aff77b9053e8dfbf12f1fa06b44c58758c4fc6f956c30004bb96d68731badc19cd641d018f8568f780f7ef448412b91359cbf19f18bf63fae26cb4cb34a417d0eec1600173977ae53e1b667deeca799b71939eb194b9d4dfa629a78afab4d3770527d41221e324008b86dd2f49a2518b11a18b98fee840d3f7bd8467d94a2d424e7d9f0279d5732b364dfed7a01650eeae2f447847ab335b77c6e5605ab074882553ea123b3caac74a3fa77578bf24945be03eaf5d70621c685e4d2df6567bbf0e6f62f2da5d7b3f754adf14def0b5e85a7de5e3c7d538f3315cae09be82dbae246825a08311801960b4dfb47a76a5c5921075aa654e1b5f69670b90476fa8e2b7b786002861eacaaa70b86129affac2dd6ea455a1ad9de7c5d1ea8d73ad7cb6a48661e0e645fd6a8cbc64b4e6ba5456bdeec572c2c35fff201da1dd5cd549acadc7c2b04daf3114338f3cd375a928122fe3f593f12cc3cff1faad1ba9ecc6b9c4d526606e4eb0c8014aeed2b025acda6f2cb968c3d3d93d8d48e6e4d81161c705e8da10e5808440fef2b9978f1b090ad7d38a74fbc3d76cd6506abd9d4494c5d979e5227eca4f45c2360e62c494f1410db492c65e22ce6241b80651b667a046b6dc57f21b701765ffc9d04135ca657f48842fab15d8154571d67c0e552466cb759ce561a8e5081a0ff9a2b7b897d3254150ba219422c4577581f0bffbfbf2a96604508242f9e1aa56b572a8cb1b9926391c6605473f110a6c4ab69d98cddc6ac7f5ad1266f206a247e71f17128adcb8ff938ad5d89f52631312ff3689f7d1ef840cee504d9c93094da0c29f27c37f3c618821f05a8285cfe5c57eb5e51ded14caf37b41c931288a83cbc4a3969053d1b3546b13bc8949da6cd9fab96629f010abf0dd010fbb02a8e01c6a1a4a3043ed915687c2eb2a96e444b601dae414ec9cbcdace01224aa9216c487ac17d3e6cd597f797c475454cb52167ba05a094d72099044f918962dbb2eeb228407ca5ecb9e6b19df6277896907749052fbf1aeaa17a9f5e30889c03458dc2dd2143c7af8abae8e33db15f2c60a93720b7028df6670d0eef82fdce3b54879b324efcf35ecab54ca48fc164ca549834e07b863ba66ab525db91bf1bd17ba80dda57eec69f22227fab570c19949f79b92dac43b20391640f76922276e5dd06cbefa9da2926ac6bf9c852dd710470c6f5fabc49b6c1fe31f5221221aad32ef3ec6c437137680e45d5b61461064f02bfb2713396230d5a1e13c9f2fb61e488a93dc0b7318782dc6f5794b62756b6328133ba5dba936b38268112e0a98d8845de8babbf025d0b7eae28791d1dfee1ea401542cbbe2de5741b4e1e503d1520975e90e829406944bd16d188e4ad930217b01beea02336f56b906636408cc0453633b815cc7257281be491f32b8bfa3941bce46142fb3e22e536cd87a18ea6a489bc736fee8009fa69065a3cf3ebb6957bf5f95b7cf9007c157d7aa1a0d7994c767564d2fc2a43c6017069dd38858adbb6ecae0fdd9cf7c8c2f923d552226757614ce6f0d0459c632d7de217666e798d95f1fae4ec9bec8ed12e7d5ff218a93fa73d24d0ad3c5f807476193d7537ab0ef81f4da007c44db46fb62ff4322a3c87dff9ff1a1d845e000a4ba8f011682a29c04b8ad86e5a6f608a91e268921ff49d265e1c2267f1fb198f27e2f4d8ca5b3a9fc940cb9b030c1996a27e46616ff3c48f973352593575119b5608278a041fde678c6b19b49f32477b8b21d7a0fa4bdad49db239c4525cb14f7b87c79ce443186e8d9dc61f548e6e234a2ea6721077d3eb2c99d6b846960245b74e33401b230d51ecfa67638a2007a429270d3191490a8b2928a00a1fd2b79a19274354429bc997514cb5f00a77bf58323f2281cacae0e456ed80df8cd5731f04b62a9a170e416bed74c532d0f0fbd28fe52fa29d0010d0aa158323883435f63dbde1528700478981dbff7d510466788f1c8f21c17d9ea0ffa66498dbde205e553a287f6559d3a02ac0050b2e5133543344a231cba2c7c7ac65e27ff9ef56e1f041f3ceedf7763daefaba1ddcc19afc8e877131c1fabc72df3bed034ccd74c4ba411bbd8624210ce240129246d638a1c6781dc2fa127bef6f7876e35d561c91bc358a46caf56d3349316c41a3171eee03f57da293527fbc0940c76af0a0a1874be4ffd360bae1efef1e70f43ccd21fa424b6cb2256b73150d214ce2c6b7ad7635548f887c16533eeac9bd8f4684026ce5e9ed703d567d2adab1e74c48eaf094a2f11f9b251d8a726a282e451c1cdc70d3b1d94206b76df398a44fb8a2d85eb9ce0cd288e88698ad565fe61508bde7e9b209c031a955f47dc6041ae9ff58cedffb47dbd163a3b2501317c7e1f0b05116089d141145f7063393e8f73f22e80b9e72cbc8356f51b5c7069563b998e707e034eeb8819860a8e0512b526068cab8e3aebf7d6bd76a5e065756ef11672f1a1ed5a31521ec18d0067e8e2ee69afdf2f80f6f660d2bc3f60e14551983c91438f749dcfce20b4dfe1dcd8eb81bb3be6150e6c1bbd206a7d6cdf9d1118cc3c5e916e0ac1d417bbc12055d7ed996f57adc7c6f21b3bbdba2c1df2e8eb1e1cc5ddf1e647f97a0e95b9833d13abbfa144abe4730e36a3eb992ce43c272b79dc2f0892fdb6da112bb865d0fcffc509ecca2e3ba3c07a238364c37e95755bebc84528cac2a3f7f8011acbf66092777f96f22d1e2700f7a63c68e9b76851d3cd1c6c0b3614384ae407d51daba4fda91ed8911d28ca0a58c68884ed219bf9f820f57573d61a42370725930e56b7d89d2445f9dfc222fd23c1bf2f6402822dc43e041d5e32b735618a21750af4095c24c51e14bb8429e5bea2708add782df0ec7fd203cafcd6d303671ed49e3f4eb257011b64e1d9f20cc4ca75fecf4c47c9aef26e6e65e0d65a7fb20a1fae6989e508f2ec22a33d13a3a30843f1d10a032da7ba54f9f10aa2a82aae08c5a988dab5fdf9e7bd120f562b94abe8f3004da64ee5e3d2dd92b89d3545e21eccef5b0feaad1f53eac83b9e9f2c343f31a624e576dc7e93322fcc3f39d0b609238f047e4a00495987b22a1d15ef9e70489a7a038c9e8bf1425624a0f05005046a05023059a15c39449eba3ad161ff6f7786120f2ca685fadc8f79b3d2f7611c3b1759a43b8ba717dda945e9f388b8b244cce3463e88a7bb5259de96305b3a08bb3d676c78b074bbbab51f71e32788ba113014f3371785e7494d9270f7b70f00000000000000000000000000000000000000000000000000000000000000002c5e958330e8a78c360101c3aa639d6937f255c76d66b87147645501916688d0300bf968e1b5df16d8e0512a0d7e0059a7dafbf7b498c30a31d821cc22d68fa600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000014943b2dc0a77a729011abccc7fc438e90b0e804d5d54c63dfce1e9bab4891ad068f05d1aea51ee6b6fb4a755c1b4cdf142f6ccef9a2574c9043216d69edfb1b1df37977001b429118311959a36ab5f699acb5ce1bcd3eea067a2ee4ce178eaf05d92f759d67e811cfb0e5c27f65f7360f2e3d911b8e04c6febbab43f39f023e035dbc30037a4d93fd16a02dc923847784cb6467d804e69b2457c51d5cb193b715331ac2c33b36ee40d67851c7a6105dde2debe3169efa6d8def4a5e852bf97d0b57c8a6e267a9054fa7e4f68a80fff93816b1c88b02953de6d1f034eb32072f2c0dca5bfc195797370824e6c8b19d1b1425f97cd81376d6042b0ec94d6d8a9819d0c4666865a11c39792a85fdf344afdd09a11c62dc88c03df94cfbec720cba24469ee099b9b98096e5faa01aafa8df9d3a5e98d5c9731ff768f241b849d91000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002b38dc2a3f8b95ba2811f1a1eca2e2f420c6746a387edd3e5c1f884a8ed21074009188dbd7203916d8d39054218fb495000617c1985fd706a14e64ec41eb74c20367975f99dcd3a09314c4dbb91e0ac0195594383adaa2096f6b21eb062b033c11a5966493c9a86b34edf8576c6ff7d62532e5c26b3e4a6162cb2e0d815c7d41246f3aaec92ae57cd32a08d5ce518bd73a5505ef1ff697a3e5cf539e2f48719908e283548c76f3eef3ec597dbc3d7f3f435d8c7d5728f251a9f962c2d905ad262d854f63e9e6f0585c6995b4c3655db59e9306c497408bbb49015a19419dd1fd007e120667dd1426584ba5db1cac02cdfad50b72f4246cebe7902d523ac493e50b075cc3e1f27a74c9dd6b702108dfab56b6b41939197af8d0d77620b764ee85035cd71d353b871cfe5d9eca95cf0a728940ec1e8d1fb223e57bf1b396d8794d200f88350246bbbd6a94705832cc7b477831a137ede0ca5be711bc66289b8d261fbfcf10ac586e09bc1fb0d0c502624b4c0a2e51b31378c06bf7ba467ccb59392ea90184eef72af1b54d7bc7a8bd5e2bf3f86dee47f26a870be9b9253e6934f4050b67a38f8cefbc85db5812c1fd833de4dba4bdb58c5f804c9ceaf2a5acd95000d7bf42eb0d6f39361d7ed4cde8565e87fb76a90f23f7aade3784c0a44c01ba2bec7a8938315bf1990573748b4e3c9c9818e3c9e7687542b1a77b5cd087542d2b66786a636594ddaaf2470c937b631530bb739f3799073964482237ec7777e008dba1e5523e9fbed1ec795ea2a21a4edc1087c0445f9a51b28849bbf4079d9201c4aaac8d636e78138a749b18796bc465847b57bc82df97c4791bcb57e5cdff0ee23668a4bf156075b3201c8c2394bd3951ef99c0827017b5c4bf045ffe7ca204f54812adc2de2dbbee9732da86a7400ed21c995b789c07a6a8e052ae87b732017a00ad14b38301921a599899d1c1f2612b065974cf07741d2cf06b0c9ef5b3106be6ee7ebc3b5c52addca5285d0ba10de6518b55d9367b1bf56f9a872c15572b5bb311f3fa14d9b48c27b34ba1c1e6b61e74663d674461cae75f165882e1d12d57b3f3752a60d5a43f373f459b8bcd7a19959c25901a6b0efdc7acd12b38af09ccdf488e2d14313ddcfe812c9374db42bb9a1817c72e326333921e7f124a4c103eaadff59e59e654f65bea768558fe5cd4674e9ba2b8a17b078a7897a210d12b28ff1e0b5d8ef20c96f54dd45626016f6d54f44496769e97549d7a4085e1162e19d21ac47c56f3f12bde1610609ddbae5cf89d31c5a1a404d08f2d268219a51458d6bf2e5f7e2420d25d95dd0882e35e09394b98270a5fb94e8049fb14af491e53ee6969fb6ca0314d92000d75783a9df635d6adba81d218b1b84e94a482bc151ab62b118aefe28517594209780c83c01da817c6b0f3a246e2fa8a95f23ed90443907b2a451f75568fc1984d16b890d4223a97359f774eaec77507595968ec20088d9318037794e9f9bebc74f8cb3d33dc9246ac46828d8936eecc5ed1cfd91be8fbe91039eeaa7512e8aaabf8b4e63adf33e61663632595b34c343b1cc6b02fda08a90c705951b9696918f1a27d279fe723a14e99ff96c0c031b39ed9a0f600b338fb3a9b92e97bbeaca5a416d0fcce139718d1f93eff14bc83defab8a5ec1cf10f57e31e2e036afef56bf2039f0bb8105ae41465c74f3123c71996cdca8c0015beea3a18eadb6821d8b6e10cd74f3a21246b3003c8c1a1de579b17bc545208fbf6319740fee7833b9d8d9041dd4afe813049239222eb17810353e8a236d40f1961d69c2c88e3cf171d9aa3cc9f531d6503322fa9d14167558ce491a1f4680e5254b293d11efcc13a3a13a77790af99e59b1a95127986808f4a15acafe6480ec89e05f1addfd8670910aa607d3881b825de25b1b84a32364e2bb3debafc53205035f3723ff6c5c50fa995574ab24cf5c6c48dadd6407722331c2e8920e6fb20cd4b0e6e52451bbdf95b3dd6c1e28ed03467fd4da4e5e0bb01bc2c25ddf57c04a55a6f4a88b6bd2be7e2d7ca16c5e1d248e5e803fc7da8f39e5c0a9f1c7a810b1b71cbc0c5716d12bfaa822251aeaac9ee94ce2be13f9290acff707f33a060139e0a000911f5c1ee9fe2f4a6757da9c6cd38cdf140f4bee78497e27ee642500257a4fff40ababbc8c4cc739f7e975f33974a506906e1ed53c8f7302739aa9007187978842621496d73e1eec722e8d59f8be24a332525b701921f84bdc707cc06e057df401e3532d587bf0dd0a110e3d09fe010122ad9e44c97f4db714cc7a7272a0628758a5d90d1349078aba07a17cd32465d5103ac23f8681e00a442fecc03ef42390a28b71c6991e18baf0d61599e98cc32f59c7dc07a6b1e9b71afb1902ff0f534186e59765a56bd6f8878952ea9dc993bce616909542b515daa96397f2ac990b5727dcc5a72426077e22b736f7df4f8d32c54da2c25ddfd6b5a1879d02b7beac563910b41af5b8a5deb42d2e387b025fe2383c084147bca32ee793c972a169cb0a7f10a2256da894ed9eab832bcaf1b0300799c1a7dc3a3c8632690630d24c2e0394c8b8e6afcab11dbdc4250010f857ebbcaac1e6f255590a67da09d0be55eec417484feebdecb25fbdeb26df925ddb2579f45737ad90c80ffcc299e1264de3f9df524e903db9b41dbb85db295a01b68e6e6399f4724c852e02647eb17424fb5b3ec346fabaf216c84a4efd22cf8468a5277946ce2a76279bd7a11d9141c40f087374f61af918de8ce3d96b5a0950f2e62cae2f276333b4a80cea08316600f88ea1e5becd1c4836b2b4756bf6ea9c9b5aa25a78effb9ecef7fed802a179dcbe330713101b749a3bad4c82156ac16f877033c08ad5666ee91d58fe1ab0225e83d3f371bfbf522c1a73b7817647fdca1209de06c2c151b479a4c573c741cc0ab835c9ec81240af4029d955dfdda17d2439074b06ac078a856a1a55307508e1d6941fe5e11e3b8e83a5ce4537141179b1fc15bc2590fef11daba0d6e9bc24100b08198e2c259a3eb60eb4cedd03b217fc6ea3c940c7c29ce41e20c6b998"
+      ]
+    },
+    "makerChange": [
+      {
+        "element": 0,
+        "grams": "300",
+        "saltIndex": 8,
+        "leafIndex": 9
+      }
+    ],
+    "makerSaltsUsed": 9
+  },
+  "model": {
+    "id": "0xca6035035ef1d98a271e5507f30e80ce879697626042a3f11c6dee7890feec2a",
+    "fromMetricsFile": false
+  },
+  "deviceSeq": {
+    "A": 5,
+    "B": 1,
+    "R2": 1,
+    "N1": 1
+  },
+  "makerSecretHint": "VITE_DEMO_MAKER_SECRET"
+}
