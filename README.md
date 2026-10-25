@@ -8,6 +8,18 @@ From 18 February 2027 every EV, light-vehicle and industrial battery sold in the
 
 *Kütle* is Turkish for mass.
 
+![Kütle: a live battery passport, signed readings, and a private recycled-content proof verified on chain](docs/gallery/1-home.jpg)
+
+## In plain words
+
+- **A battery's health record that nobody can quietly edit.** A small chip next to the battery signs its readings with a signature built to resist future quantum computers, and the blockchain checks it.
+- **Recycled metal that has to add up.** A recycler can only claim metal from batteries it really took in, and never more than physics allows. The same kilogram can't be counted twice.
+- **Suppliers stay private.** A battery maker proves it used enough recycled metal without revealing who sold it.
+
+We tried to cheat every rule. The app's attack console sends those attempts as real transactions, and each one is refused with the reason shown:
+
+![Three attacks on the recycling ledger, each refused by the contract](docs/gallery/2-attacks.jpg)
+
 ## Judge guide: every requirement and where it is
 
 | Requirement | Where | Status |
