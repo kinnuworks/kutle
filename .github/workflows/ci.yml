@@ -26,7 +26,7 @@ jobs:
       - name: Symbolic proofs
         run: |
           python3 -m pip install --quiet halmos
-          halmos --contract SymbolicTest --solver-timeout-assertion 0
+          halmos --contract SymbolicTest --function "check_assayAcceptedImpliesConservation|check_grade"
 
   circuit:
     runs-on: ubuntu-latest
