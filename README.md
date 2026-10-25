@@ -2,6 +2,11 @@
 
 Like a car's service history, but for EV batteries, and impossible to fake. Good batteries get a second life instead of the shredder.
 
+- **Climate:** every pack moved from the shredder into a second life avoids building new storage. For the packs of one Turkish factory that is up to 12,000 t CO2 a year by the mid 2030s (scenario, assumptions in [docs/IMPACT.md](docs/IMPACT.md)).
+- **Blockchain:** battery readings signed twice (one signature is post-quantum) and checked on chain, a grade the seller can't pick, and a recycling ledger where metal has to add up.
+- **AI:** health models trained on public cell data. The contract only accepts a model that proves its accuracy on data it has never seen. Ours haven't passed yet, so we kept the rule and published the numbers.
+- **Try to cheat it:** 12 attacks, each sent as a real transaction and refused with the contract's reason.
+
 IEEE ClimateChain Global Hackathon 2026 · Track 3, Sustainable supply chains and circular economy (also touches Track 2, second-life storage, and Track 4, signed sensor data).
 
 From 18 February 2027 every EV, light-vehicle and industrial battery sold in the EU needs a digital passport (Regulation (EU) 2023/1542). From 2031 battery makers must also meet minimum shares of recycled cobalt, lithium, nickel and lead. Kütle issues the passport, keeps the battery's health history honest for the ten-plus years a passport must survive, decides whether a used pack should get a second life or go to recycling, and runs a ledger in which no gram of recycled metal can be counted twice or created out of nothing.
