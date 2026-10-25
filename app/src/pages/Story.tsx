@@ -445,7 +445,7 @@ export function Story() {
               <a className="btn btn-candy btn-lg" href="#journey" onClick={(e) => { e.preventDefault(); document.getElementById("journey")?.scrollIntoView({ behavior: "smooth" }); }}>{s.cta1}</a>
               <Link className="btn btn-outline btn-lg" to="/attacks">{s.cta2}</Link>
             </div>
-            <div className="trust"><span>{chain.name}</span>{s.trust.map((t) => <span key={t}>{t}</span>)}</div>
+            <div className="trust"><span>{chain.name}</span>{s.trust.map((t) => <span key={t}>{t}</span>)}<a href="https://youtu.be/kd-sNqu5z9E" target="_blank" rel="noreferrer">{lang === "tr" ? "Filmi izleyin (3:31) →" : "Watch the film (3:31) →"}</a></div>
           </div>
           <div className="hero__visual" style={{ marginTop: 0 }}>
             {d ? <HeroWindow d={d} lang={lang} /> : <div className="stage" style={{ minHeight: 360, display: "grid", placeItems: "center" }}>{q.error != null ? <ErrorBox error={q.error} onRetry={q.reload} /> : q.loading ? <Loading /> : <a className="notice" href="#/verify/1" style={{ maxWidth: 520, textAlign: "center" }}>{s.noDemo}</a>}</div>}

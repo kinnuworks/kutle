@@ -165,7 +165,7 @@ cd app && pnpm install && pnpm dev:chain
 
 ## What is real and what is simulated
 
-Real: ML-DSA-44 and ECDSA signatures checked on chain, the UltraHonk proof checked on chain, the laptop battery's gauge readings, the health model's evaluation on public data, all contract rules. Simulated: the testnet role keys, the lab's accreditation reference, the recycler batches and assay numbers in the demo. The demo battery is a laptop pack, which the passport mandate does not cover; the pipeline is the one an EV or industrial pack would use. Full list in [docs/SECURITY.md](docs/SECURITY.md) section 4.
+Real: ML-DSA-44 and ECDSA signatures checked on chain, the UltraHonk proof checked on chain, the laptop battery's gauge readings, the health model's evaluation on public data, all contract rules. Simulated: the testnet role keys, the lab's accreditation reference, the recycler batches and assay numbers in the demo. The demo battery is a laptop pack, which the passport mandate does not cover; the pipeline is the one an EV or industrial pack would use. The ESP32-S3 firmware builds and passes its host tests, but no physical board is shown: on the testnet the laptop gateway signs in its fallback mode, with the same keys and checks. Full list in [docs/SECURITY.md](docs/SECURITY.md) section 4.
 
 ## Credits
 
